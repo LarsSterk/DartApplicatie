@@ -17,4 +17,31 @@ public class Speler {
         this.niveau = niveau;
     }
 
+    // Methods
+    public void maakSpeler() {
+
+    }
+
+    public void leesSpeler() {
+
+    }
+
+    public void updateSpeler() {
+
+    }
+
+    public void verwijderSpeler() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Speler{" +
+                "id=" + id +
+                ", voornaam='" + voornaam + '\'' +
+                ", achternaam='" + achternaam + '\'' +
+                ", leeftijd=" + leeftijd +
+                ", niveau='" + niveau + '\'' +
+                '}';
+    }
 }
