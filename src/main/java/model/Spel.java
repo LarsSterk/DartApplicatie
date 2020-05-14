@@ -7,6 +7,7 @@ public class Spel {
     private ArrayList<Speler> spelersLijst;
     private String type;
     private int stand;
+    private ArrayList<Leg> legLijst;
 
     // Methods
     public void maakSpel() {
@@ -23,6 +24,10 @@ public class Spel {
 
     public void updateStand() {
 
+    }
+
+    public void voegLegToe(){
+        
     }
 
     @Override

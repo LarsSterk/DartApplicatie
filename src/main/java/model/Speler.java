@@ -7,6 +7,10 @@ public class Speler {
     private String achternaam;
     private int leeftijd;
     private String niveau;
+    private int spellenGespeeld;
+    private int spellenGewonnen;
+    private int spellenVerloren;
+
 
     // Constructor
     public Speler(int id, String voornaam, String achternaam, int leeftijd, String niveau) {
