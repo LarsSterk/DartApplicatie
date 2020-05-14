@@ -29,7 +29,7 @@ public class Leg {
     public void verwijderWorp() {
 
     }
-    
+
     public void voegScoreToe() {
 
     }
