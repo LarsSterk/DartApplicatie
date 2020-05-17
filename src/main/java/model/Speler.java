@@ -1,7 +1,7 @@
 package model;
 
 public class Speler {
-    // Attributen
+    // --- Attributen ---
     private int id;
     private String voornaam;
     private String achternaam;
@@ -12,7 +12,7 @@ public class Speler {
     private int spellenVerloren;
 
 
-    // Constructor
+    // --- Constructor ---
     public Speler(int id, String voornaam, String achternaam, int leeftijd, String niveau) {
         this.id = id;
         this.voornaam = voornaam;
@@ -21,7 +21,73 @@ public class Speler {
         this.niveau = niveau;
     }
 
-    // Methods
+    // --- Getters ---
+    public int getId() {
+        return id;
+    }
+
+    public String getVoornaam() {
+        return voornaam;
+    }
+
+    public String getAchternaam() {
+        return achternaam;
+    }
+
+    public int getLeeftijd() {
+        return leeftijd;
+    }
+
+    public String getNiveau() {
+        return niveau;
+    }
+
+    public int getSpellenGespeeld() {
+        return spellenGespeeld;
+    }
+
+    public int getSpellenGewonnen() {
+        return spellenGewonnen;
+    }
+
+    public int getSpellenVerloren() {
+        return spellenVerloren;
+    }
+
+    // --- Setters ---
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setVoornaam(String voornaam) {
+        this.voornaam = voornaam;
+    }
+
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
+    }
+
+    public void setLeeftijd(int leeftijd) {
+        this.leeftijd = leeftijd;
+    }
+
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
+    }
+
+    public void setSpellenGespeeld(int spellenGespeeld) {
+        this.spellenGespeeld = spellenGespeeld;
+    }
+
+    public void setSpellenGewonnen(int spellenGewonnen) {
+        this.spellenGewonnen = spellenGewonnen;
+    }
+
+    public void setSpellenVerloren(int spellenVerloren) {
+        this.spellenVerloren = spellenVerloren;
+    }
+
+    // --- Methods ---
     public void maakSpeler() {
 
     }

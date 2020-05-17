@@ -1,11 +1,29 @@
 package model;
 
 public class Leg {
-    // Attributen
+    // --- Attributen ---
     private int worp;
     private int[] scoreLijst;
 
-    // Methods
+    // --- Getters ---
+    public int getWorp() {
+        return worp;
+    }
+
+    public int[] getScoreLijst() {
+        return scoreLijst;
+    }
+
+    // --- Setters ---
+    public void setWorp(int worp) {
+        this.worp = worp;
+    }
+
+    public void setScoreLijst(int[] scoreLijst) {
+        this.scoreLijst = scoreLijst;
+    }
+
+    // --- Methods ---
     public void nieuweLeg() {
 
     }
