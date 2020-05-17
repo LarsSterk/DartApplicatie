@@ -4,19 +4,26 @@ import java.util.ArrayList;
 
 public class Spel {
     // --- Attributen ---
-    private ArrayList<Speler> spelersLijst; // Associatie naar Speler
-    private ArrayList<Leg> legLijst; // Associatie naar Leg
+    private int spelId;
+    private ArrayList<Speler> spelersLijst; // Associatie naar Speler.java
     private String type;
-    private int[][] stand;
     private int winnendAantalLegs;
+    private ArrayList<Leg> legLijst; // Associatie naar Leg.java
+    private ArrayList<Integer> stand; // ArrayList om de stand bij te houden, de ArrayList bevat Integers omdat het de score is.
 
     // --- Constructor ---
-    public Spel(ArrayList<Speler> spelersLijst, String type, int[][] stand, ArrayList<Leg> legLijst, int winnendAantalLegs) {
+    public Spel(String type,  int winnendAantalLegs, ArrayList<Speler> spelersLijst) {
         this.spelersLijst = spelersLijst;
         this.type = type;
-        this.stand = stand;
-        this.legLijst = legLijst;
         this.winnendAantalLegs = winnendAantalLegs;
+        this.legLijst = new ArrayList<>();
+        this.stand  = new ArrayList<>();
+        this.spelId = 0;
+
+        for (Speler speler : spelersLijst) {
+            stand.add(0);
+        }
+
     }
 
     // --- Getters ---
@@ -28,7 +35,7 @@ public class Spel {
         return type;
     }
 
-    public int[][] getStand() {
+    public ArrayList<Integer> getStand() {
         return stand;
     }
 
@@ -40,6 +47,10 @@ public class Spel {
         return winnendAantalLegs;
     }
 
+    public int getSpelId() {
+        return spelId;
+    }
+
     // --- Setters ---
     public void setSpelersLijst(ArrayList<Speler> spelersLijst) {
         this.spelersLijst = spelersLijst;
@@ -49,7 +60,7 @@ public class Spel {
         this.type = type;
     }
 
-    public void setStand(int[][] stand) {
+    public void setStand(ArrayList<Integer> stand) {
         this.stand = stand;
     }
 
@@ -59,6 +70,10 @@ public class Spel {
 
     public void setWinnendAantalLegs(int winnendAantalLegs) {
         this.winnendAantalLegs = winnendAantalLegs;
+    }
+
+    public void setSpelId(int spelId) {
+        this.spelId = spelId;
     }
 
     // --- Methods ---
@@ -82,5 +97,15 @@ public class Spel {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Spel{" +
+                "spelId=" + spelId +
+                ", spelersLijst=" + spelersLijst +
+                ", type='" + type + '\'' +
+                ", winnendAantalLegs=" + winnendAantalLegs +
+                ", legLijst=" + legLijst +
+                ", stand=" + stand +
+                '}';
+    }
 }

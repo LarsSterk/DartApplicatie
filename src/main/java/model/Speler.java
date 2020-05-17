@@ -13,12 +13,25 @@ public class Speler {
 
 
     // --- Constructor ---
-    public Speler(int id, String voornaam, String achternaam, int leeftijd, String niveau) {
-        this.id = id;
+    public Speler(String voornaam, String achternaam, int leeftijd, String niveau) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.leeftijd = leeftijd;
         this.niveau = niveau;
+        this.id = 0;
+        this.spellenGespeeld = 0;
+        this.spellenGewonnen = 0;
+        this.spellenVerloren = 0;
+    }
+
+    public Speler(String voornaam, String achternaam, String niveau) { // Zonder leeftijd
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
+        this.niveau = niveau;
+        this.id = 0;
+        this.spellenGespeeld = 0;
+        this.spellenGewonnen = 0;
+        this.spellenVerloren = 0;
     }
 
     // --- Getters ---
