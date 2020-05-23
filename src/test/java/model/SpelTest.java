@@ -18,8 +18,8 @@ class SpelTest {
 
     @BeforeEach
     public void init() {
-        speler1 = new Speler("voornaam1", "achternaam1", 19, "Beginner");
-        speler2 = new Speler("voornaam2", "achternaam2", "Amateur");
+        speler1 = new Speler(1,"voornaam1", "achternaam1", 19, "Beginner");
+        speler2 = new Speler(2, "voornaam2", "achternaam2", "Amateur");
         spelers = new ArrayList<>();
         spelers.add(speler1);
         spelers.add(speler2);
@@ -76,7 +76,7 @@ class SpelTest {
 
     @Test
     void setSpelersLijst() {
-        Speler speler3 = new Speler("voornaam3", "achternaam3", 20, "Amateur");
+        Speler speler3 = new Speler(1, "voornaam3", "achternaam3", 20, "Amateur");
         spelers.add(speler3);
         spel.setSpelersLijst(spelers);
 

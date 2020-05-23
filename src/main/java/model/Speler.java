@@ -1,6 +1,9 @@
 package model;
 
-public class Speler {
+import javax.servlet.annotation.WebListener;
+import java.io.Serializable;
+
+public class Speler implements Serializable {
     // --- Attributen ---
     private int id;
     private String voornaam;
@@ -13,7 +16,7 @@ public class Speler {
 
 
     // --- Constructor ---
-    public Speler(String voornaam, String achternaam, int leeftijd, String niveau) {
+    public Speler(int id, String voornaam, String achternaam, int leeftijd, String niveau) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.leeftijd = leeftijd;
@@ -24,7 +27,7 @@ public class Speler {
         this.spellenVerloren = 0;
     }
 
-    public Speler(String voornaam, String achternaam, String niveau) { // Zonder leeftijd
+    public Speler(int id, String voornaam, String achternaam, String niveau) { // Zonder leeftijd
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.niveau = niveau;
@@ -98,33 +101,5 @@ public class Speler {
 
     public void setSpellenVerloren(int spellenVerloren) {
         this.spellenVerloren = spellenVerloren;
-    }
-
-    // --- Methods ---
-    public void maakSpeler() {
-
-    }
-
-    public void leesSpeler() {
-
-    }
-
-    public void updateSpeler() {
-
-    }
-
-    public void verwijderSpeler() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "Speler{" +
-                "id=" + id +
-                ", voornaam='" + voornaam + '\'' +
-                ", achternaam='" + achternaam + '\'' +
-                ", leeftijd=" + leeftijd +
-                ", niveau='" + niveau + '\'' +
-                '}';
     }
 }

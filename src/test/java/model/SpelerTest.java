@@ -13,8 +13,8 @@ class SpelerTest {
 
     @BeforeEach
     public void init() {
-        speler1 = new Speler("voornaam1", "achternaam1", 19, "Beginner");
-        speler2 = new Speler("voornaam2", "achternaam2", "Amateur");
+        speler1 = new Speler(1, "voornaam1", "achternaam1", 19, "Beginner");
+        speler2 = new Speler(2,"voornaam2", "achternaam2", "Amateur");
     }
 
     @Test

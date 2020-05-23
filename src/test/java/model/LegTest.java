@@ -20,9 +20,9 @@ class LegTest {
 
     @BeforeEach
     public void init(){
-        speler1 = new Speler("voornaam1", "achternaam1", 19, "Beginner");
-        speler2 = new Speler("voornaam2", "achternaam2", "Amateur");
-        speler3 = new Speler("voornaam3", "achternaam3", "Professional");
+        speler1 = new Speler(1,"voornaam1", "achternaam1", 19, "Beginner");
+        //speler2 = new Speler("voornaam2", "achternaam2", "Amateur");
+        //speler3 = new Speler("voornaam3", "achternaam3", "Professional");
         spelers = new ArrayList<>();
         spelers.add(speler1);
         spelers.add(speler2);

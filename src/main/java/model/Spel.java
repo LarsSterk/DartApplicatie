@@ -1,18 +1,20 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Spel {
+public class Spel implements Serializable {
     // --- Attributen ---
     private int spelId;
-    private ArrayList<Speler> spelersLijst; // Associatie naar Speler.java
+    private List<Speler> spelersLijst = new ArrayList<>(); // Associatie naar Speler.java
     private String type;
     private int winnendAantalLegs;
     private ArrayList<Leg> legLijst; // Associatie naar Leg.java
     private ArrayList<Integer> stand; // ArrayList om de stand bij te houden, de ArrayList bevat Integers omdat het de score is.
 
     // --- Constructor ---
-    public Spel(String type,  int winnendAantalLegs, ArrayList<Speler> spelersLijst) {
+    public Spel(String type,  int winnendAantalLegs, List<Speler> spelersLijst) {
         this.spelersLijst = spelersLijst;
         this.type = type;
         this.winnendAantalLegs = winnendAantalLegs;
@@ -27,7 +29,7 @@ public class Spel {
     }
 
     // --- Getters ---
-    public ArrayList<Speler> getSpelersLijst() {
+    public List<Speler> getSpelersLijst() {
         return spelersLijst;
     }
 
@@ -77,6 +79,7 @@ public class Spel {
     }
 
     // --- Methods ---
+
     public void maakSpel() {
 
     }
