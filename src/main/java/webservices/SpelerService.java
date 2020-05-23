@@ -5,10 +5,7 @@ import model.Spel;
 import model.Speler;
 
 import javax.json.*;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.StringReader;
 
@@ -29,10 +26,12 @@ public class SpelerService {
             String voornaam = jsonObject.getString("voornaam");
             String achternaam = jsonObject.getString("achternaam");
             String niveau = jsonObject.getString("niveau");
+            int leeftijd = Integer.parseInt(jsonObject.getString("leeftijd"));
 
-            Speler newSpeler = new Speler(id, voornaam, achternaam, niveau);
+            Speler newSpeler = new Speler(id, voornaam, achternaam, leeftijd, niveau);
+            //Speler newSpelerLft = new Speler(id, voornaam, achternaam, leeftijd, niveau);
 
-            if (SpelersDAO.getSpelers().addSpeler(newSpeler)){
+            if (SpelersDAO.getSpelers().addSpeler(newSpeler) /*|| SpelersDAO.getSpelers().addSpeler(newSpelerLft)*/){
                 message = "Speler aangemaakt.";
             }else{
                 message = "Speler bestaat al.";
@@ -53,19 +52,11 @@ public class SpelerService {
         for (Speler speler : spelersDAO.getAllSpelers()){
             JsonObjectBuilder job = Json.createObjectBuilder();
 
-            if (speler.getLeeftijd() == 0){
-                job.add("id: ", speler.getId());
-                job.add("voornaam:", speler.getVoornaam());
-                job.add("achternaam: ", speler.getAchternaam());
-                job.add("niveau: ", speler.getNiveau());
-
-            }else {
-                job.add("id: ", speler.getId());
-                job.add("voornaam:", speler.getVoornaam());
-                job.add("achternaam: ", speler.getAchternaam());
-                job.add("leeftijd: ", speler.getLeeftijd());
-                job.add("niveau: ", speler.getNiveau());
-            }
+            job.add("id: ", speler.getId());
+            job.add("voornaam:", speler.getVoornaam());
+            job.add("achternaam: ", speler.getAchternaam());
+            job.add("leeftijd: ", speler.getLeeftijd());
+            job.add("niveau: ", speler.getNiveau());
 
             jab.add(job);
         }
@@ -73,6 +64,28 @@ public class SpelerService {
         JsonArray array =jab.build();
         return array.toString();
     }
+
+    @GET
+    @Path("/spelerslijst/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getSpelerById(@PathParam("id") int id){
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        Speler speler = SpelersDAO.getSpelers().getSpelerById(id);
+        JsonObjectBuilder job = Json.createObjectBuilder();
+
+        job.add("id: ", speler.getId());
+        job.add("voornaam:", speler.getVoornaam());
+        job.add("achternaam: ", speler.getAchternaam());
+        job.add("leeftijd: ", speler.getLeeftijd());
+        job.add("niveau: ", speler.getNiveau());
+
+        jab.add(job);
+        JsonArray array =jab.build();
+
+        return array.toString();
+    }
+
+    
 
 
 }

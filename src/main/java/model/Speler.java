@@ -21,7 +21,7 @@ public class Speler implements Serializable {
         this.achternaam = achternaam;
         this.leeftijd = leeftijd;
         this.niveau = niveau;
-        this.id = 0;
+        this.id = id;
         this.spellenGespeeld = 0;
         this.spellenGewonnen = 0;
         this.spellenVerloren = 0;
@@ -31,7 +31,7 @@ public class Speler implements Serializable {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
         this.niveau = niveau;
-        this.id = 0;
+        this.id = id;
         this.spellenGespeeld = 0;
         this.spellenGewonnen = 0;
         this.spellenVerloren = 0;
