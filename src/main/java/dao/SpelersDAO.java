@@ -1,5 +1,6 @@
 package dao;
 
+import model.Spel;
 import model.Speler;
 
 import java.io.Serializable;
@@ -55,6 +56,10 @@ public class SpelersDAO implements Serializable {
         return null;
     }
 
+    public Speler getSpeler(int id){
+        return getAllSpelers().stream().filter(e->e.getId()==id).findFirst().orElse(null);
+    }
+
     public boolean addSpeler(Speler newSpeler){
 
         setMaxId(maxID + 1);
@@ -62,4 +67,28 @@ public class SpelersDAO implements Serializable {
 
         return spelersList.add(newSpeler);
     }
+
+    public boolean updateSpeler(Speler upSpeler){
+        for (Speler speler : spelersList){
+            if (speler.getId() == upSpeler.getId()){
+                int index = spelersList.indexOf(speler);
+                spelersList.set(index, upSpeler);
+                return true;
+            }
+        }
+        return false;
+  }
+
+    public boolean deleteSpeler(int id){
+        for(Speler speler : spelersList){
+            if(speler.getId() == id){
+                int index = spelersList.indexOf(speler);
+                spelersList.remove(index);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

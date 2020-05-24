@@ -7,12 +7,16 @@ import model.Speler;
 import javax.json.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.PipedReader;
 import java.io.StringReader;
+import java.util.AbstractMap;
 
 @Path("/spelers")
 public class SpelerService {
 
     @POST
+    @Path("/aanmaken")
     @Produces(MediaType.APPLICATION_JSON)
     public String createSpeler(String jsonBody){
         StringReader stringReader = new StringReader(jsonBody);
@@ -85,7 +89,48 @@ public class SpelerService {
         return array.toString();
     }
 
-    
 
+    @PUT
+    @Path("/spelerslijst/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateSpeler(String jsonBody){
+        StringReader stringReader = new StringReader(jsonBody);
+        JsonStructure structure = Json.createReader(stringReader).read();
+
+        String message;
+
+        if (structure.getValueType() == JsonValue.ValueType.OBJECT){
+            JsonObject jsonObject = (JsonObject)structure;
+            int id = Integer.parseInt(jsonObject.getString("id"));
+            String voornaam = jsonObject.getString("voornaam");
+            String achternaam = jsonObject.getString("achternaam");
+            String niveau = jsonObject.getString("niveau");
+            int leeftijd = Integer.parseInt(jsonObject.getString("leeftijd"));
+
+            Speler newSpeler = new Speler(id, voornaam, achternaam, leeftijd, niveau);
+
+            if (SpelersDAO.getSpelers().updateSpeler(newSpeler)){
+                message = "Speler geupdate.";
+            }else{
+                message = "Speler bestaat al.";
+            }
+        }else{
+            message = "Wrong Json format";
+        }
+        return Json.createObjectBuilder().add("message", message).build().toString();
+    }
+
+    @DELETE
+    @Path("/spelerslijst/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteSpeler(@PathParam("id") int id){
+        String message = "Wrong json format";
+        if (SpelersDAO.getSpelers().deleteSpeler(id)){
+            message = "Speler verwijderd.";
+        }else{
+            message = "Speler niet gevonden.";
+        }
+        return Json.createObjectBuilder().add("message", message).build().toString();
+    }
 
 }
