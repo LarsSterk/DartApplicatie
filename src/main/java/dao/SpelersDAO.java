@@ -1,8 +1,10 @@
 package dao;
 
+import managers.PersistenceManager;
 import model.Spel;
 import model.Speler;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +19,12 @@ public class SpelersDAO implements Serializable {
         return spelersDAO;
     }
 
-    public static void setSpelers(SpelersDAO spelers) {
-        spelersDAO = spelers;
+    public List<Speler> getAllSpelers() {
+        return spelersList;
+    }
+
+    public void setSpelersList(List<Speler> spelersList) {
+        this.spelersList = spelersList;
     }
 
     private int getMaxId(){
@@ -30,13 +36,20 @@ public class SpelersDAO implements Serializable {
 
 
     private SpelersDAO() {
-        spelersList.add(new Speler(1, "Lars", "Sterk", 19, "Pro"));
-        spelersList.add(new Speler(2, "Kaj", "Sterk", "Pro"));
+        try {
+            SpelersDAO loadedDAO = PersistenceManager.loadSpelerFromAzure();
+            if (loadedDAO == null) {
+                spelersList.add(new Speler(1, "Lars", "Sterk", 19, "Pro"));
+                spelersList.add(new Speler(2, "Kaj", "Sterk", "Pro"));
+            } else {
+                this.setMaxId(loadedDAO.getMaxId());
+                this.setSpelersList(loadedDAO.getAllSpelers());
+            }
+        }catch (IOException | ClassNotFoundException io){
+            System.out.println(io.getMessage());
+        }
     }
 
-    public List<Speler> getAllSpelers() {
-        return spelersList;
-    }
 
     public Speler getSpelerById(int ID){
         for (Speler speler:spelersList){
@@ -60,30 +73,34 @@ public class SpelersDAO implements Serializable {
         return getAllSpelers().stream().filter(e->e.getId()==id).findFirst().orElse(null);
     }
 
-    public boolean addSpeler(Speler newSpeler){
+
+    public boolean addSpeler(Speler newSpeler) throws IOException {
 
         setMaxId(maxID + 1);
         newSpeler.setId(getMaxId());
-
-        return spelersList.add(newSpeler);
+        boolean result = spelersList.add(newSpeler);
+        PersistenceManager.saveSpelerToAzure(spelersDAO);
+        return result;
     }
 
-    public boolean updateSpeler(Speler upSpeler){
+    public boolean updateSpeler(Speler upSpeler) throws IOException {
         for (Speler speler : spelersList){
             if (speler.getId() == upSpeler.getId()){
                 int index = spelersList.indexOf(speler);
                 spelersList.set(index, upSpeler);
+                PersistenceManager.saveSpelerToAzure(spelersDAO);
                 return true;
             }
         }
         return false;
   }
 
-    public boolean deleteSpeler(int id){
+    public boolean deleteSpeler(int id) throws IOException {
         for(Speler speler : spelersList){
             if(speler.getId() == id){
                 int index = spelersList.indexOf(speler);
                 spelersList.remove(index);
+                PersistenceManager.saveSpelerToAzure(spelersDAO);
                 return true;
             }
         }
