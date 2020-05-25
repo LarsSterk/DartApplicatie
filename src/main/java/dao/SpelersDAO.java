@@ -1,13 +1,13 @@
 package dao;
 
 import managers.PersistenceManager;
-import model.Spel;
 import model.Speler;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class SpelersDAO implements Serializable {
 
@@ -27,13 +27,17 @@ public class SpelersDAO implements Serializable {
         this.spelersList = spelersList;
     }
 
-    private int getMaxId(){
+    public int getMaxId(){
         return maxID;
     }
-    private void setMaxId(int newID){
+    public void setMaxId(int newID){
         maxID = newID;
     }
 
+    public SpelersDAO (int maxID, List<Speler> spelersList){
+        this.maxID = maxID;
+        this.spelersList =  spelersList;
+    }
 
     private SpelersDAO() {
         try {
@@ -45,7 +49,7 @@ public class SpelersDAO implements Serializable {
                 this.setMaxId(loadedDAO.getMaxId());
                 this.setSpelersList(loadedDAO.getAllSpelers());
             }
-        }catch (IOException | ClassNotFoundException io){
+        }catch (IOException io){
             System.out.println(io.getMessage());
         }
     }

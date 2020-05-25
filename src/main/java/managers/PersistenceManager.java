@@ -4,8 +4,14 @@ import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
 import dao.SpelersDAO;
+import model.Speler;
+import org.w3c.dom.stylesheets.LinkStyle;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.json.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class PersistenceManager {
     private final static String ENDPOINT = "https://dartapplicatiestorage.blob.core.windows.net/";
@@ -19,25 +25,99 @@ public class PersistenceManager {
             .buildClient();
 
 
-    // Save naar Azure
+    private static String createJSONStringfromSpelersDAO(SpelersDAO spelersDAO) {
+
+        List<Speler> spelersList = spelersDAO.getAllSpelers();
+
+        /* initialiseer de json objecten die we nodig hebben in de string */
+
+        JsonObjectBuilder job = Json.createObjectBuilder();
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        JsonObjectBuilder spelerDetailJob = Json.createObjectBuilder();
+
+
+        /*Voeg de het max ID toe via een jsonobject*/
+        job.add("maxID", spelersDAO.getMaxId());
+
+        /*Voeg de JSONarray met spelersdetails toe via een jsonarray*/
+        for (Speler speler : spelersList) {
+            spelerDetailJob.add("id", speler.getId());
+            spelerDetailJob.add("voornaam", speler.getVoornaam());
+            spelerDetailJob.add("achternaam", speler.getAchternaam());
+            spelerDetailJob.add("leeftijd", speler.getLeeftijd());
+            spelerDetailJob.add("niveau", speler.getNiveau());
+            jab.add(spelerDetailJob);
+        }
+        job.add("Spelers", jab);
+
+        /* geef de dao terug als json object string */
+
+        return job.build().toString();
+    }
+
+    private static SpelersDAO createSpelersDAOFromJSONString(String jSONString) {
+
+        List<Speler> spelersList = new ArrayList<>();
+
+        /* converteer de string naar een json object */
+        StringReader stringReader = new StringReader(jSONString);
+        JsonStructure structure = Json.createReader(stringReader).read();
+        JsonObject job = (JsonObject) structure;
+
+        /*Lees alle spelers uit de json string en stop ze in een spelerslist*/
+        JsonArray jab = job.getJsonArray("Spelers");
+
+        for (int i = 0; i < jab.size(); i++) {
+
+            int id = jab.getJsonObject(i).getInt("id");
+            String voornaam = jab.getJsonObject(i).getString("voornaam");
+            String achternaam = jab.getJsonObject(i).getString("achternaam");
+            int leeftijd = jab.getJsonObject(i).getInt("leeftijd");
+            String niveau = jab.getJsonObject(i).getString("niveau");
+
+            Speler newSpeler = new Speler(id, voornaam, achternaam, leeftijd, niveau);
+            spelersList.add(newSpeler);
+        }
+
+        /* alles gelezen. Nu in de SpelersDAO stoppen*/
+        return new SpelersDAO(job.getInt("maxID"), spelersList);
+    }
+
+    // Save de spelers naar Azure
     public static void saveSpelerToAzure(SpelersDAO spelersDAO) throws IOException {
         if (!blobContainer.exists()) {
             blobContainer.create();
         }
 
         BlobClient blob = blobContainer.getBlobClient("spelerBlob");
+        /*converteer de SpelersDAO naar een JSON String*/
+        String spelerDB = createJSONStringfromSpelersDAO(spelersDAO);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(spelersDAO);
-
-        byte[] bytez = baos.toByteArray();
-
-        ByteArrayInputStream bais = new ByteArrayInputStream(bytez);
-        blob.upload(bais, bytez.length, true);
-
-        oos.close();
+        /*Save de json string als BLOB in azure*/
+        ByteArrayInputStream bais = new ByteArrayInputStream(spelerDB.getBytes());
+        blob.upload(bais, spelerDB.length(), true);
         bais.close();
+    }
+
+    // Load de spelers van Azure
+    public static SpelersDAO loadSpelerFromAzure() throws IOException {
+        if (blobContainer.exists()) {
+            BlobClient blob = blobContainer.getBlobClient("spelerBlob");
+
+            if (blob.exists()) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                blob.download(baos);
+                String spelerDB = baos.toString();
+                baos.close();
+
+                /* De spelers zijn opgeslagen als JSON string in azure. Hieronder maak ik er een Spelers DAO van */
+                return createSpelersDAOFromJSONString(spelerDB);
+
+            }
+
+        }
+
+        return null;
     }
 
     // Save naar een file
@@ -45,8 +125,6 @@ public class PersistenceManager {
         try {
             System.out.println("save test");
             File file = new File("Spelers.dat");
-            FileOutputStream fos;
-
             if (!file.exists()) {
                 if (file.createNewFile()) {
                     System.out.println("file aangemaakt");
@@ -54,13 +132,11 @@ public class PersistenceManager {
                     System.out.println("file NIET aangemaakt");
                 }
             }
+            FileWriter fw = new FileWriter(file);
+            fw.write(createJSONStringfromSpelersDAO(spelersDAO));
+            fw.flush();
+            fw.close();
 
-            fos = new FileOutputStream(file);
-
-
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(spelersDAO);
-            oos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -68,58 +144,26 @@ public class PersistenceManager {
         }
     }
 
-    // Load van Azure
-    public static SpelersDAO loadSpelerFromAzure() throws IOException, ClassNotFoundException {
-        if (blobContainer.exists()) {
-            System.out.println("blob exists");
-            BlobClient blob = blobContainer.getBlobClient("spelerBlob");
-
-            if (blob.exists()) {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                blob.download(baos);
-
-                byte[] bytez = baos.toByteArray();
-
-                ByteArrayInputStream bais = new ByteArrayInputStream(bytez);
-                ObjectInputStream ois = new ObjectInputStream(bais);
-
-                Object obj = ois.readObject();
-                if (obj instanceof SpelersDAO) {
-                    SpelersDAO loadedSpelerdao = (SpelersDAO) obj;
-                    return loadedSpelerdao;
-                }
-
-                baos.close();
-                ois.close();
-            }
-
-        }
-        return null;
-    }
-
     // Load speler van een file
     public static SpelersDAO loadSpelerFromFile() throws IOException, ClassNotFoundException {
         try {
-            System.out.println("load test");
             File file = new File("Spelers.dat");
             if (!file.exists()) {
                 System.out.println("file niet gevonden");
 
                 return null;
             } else {
-                FileInputStream fis = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                Object obj = ois.readObject();
-                if (obj instanceof SpelersDAO) {
-                    SpelersDAO loadedSpelerdao = (SpelersDAO) obj;
-//                    SpelersDAO.setSpelers(loadedSpelerdao);
-                    return loadedSpelerdao;
+                StringBuilder fileContents = new StringBuilder((int) file.length());
+                try (Scanner scanner = new Scanner(file)) {
+                    while (scanner.hasNextLine()) {
+                        fileContents.append(scanner.nextLine() + System.lineSeparator());
+                    }
+                    return createSpelersDAOFromJSONString(fileContents.toString());
                 }
-                ois.close();
+
             }
+
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
