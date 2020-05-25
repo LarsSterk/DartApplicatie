@@ -29,17 +29,17 @@ public class PersistenceManager {
 
         List<Speler> spelersList = spelersDAO.getAllSpelers();
 
-        /* initialiseer de json objecten die we nodig hebben in de string */
+         // initialiseer de json objecten die we nodig hebben in de string
 
         JsonObjectBuilder job = Json.createObjectBuilder();
         JsonArrayBuilder jab = Json.createArrayBuilder();
         JsonObjectBuilder spelerDetailJob = Json.createObjectBuilder();
 
 
-        /*Voeg de het max ID toe via een jsonobject*/
+        // Voeg de het max ID toe via een jsonobject
         job.add("maxID", spelersDAO.getMaxId());
 
-        /*Voeg de JSONarray met spelersdetails toe via een jsonarray*/
+        // Voeg de JSONarray met spelersdetails toe via een jsonarray
         for (Speler speler : spelersList) {
             spelerDetailJob.add("id", speler.getId());
             spelerDetailJob.add("voornaam", speler.getVoornaam());
@@ -50,7 +50,7 @@ public class PersistenceManager {
         }
         job.add("Spelers", jab);
 
-        /* geef de dao terug als json object string */
+        // geef de SpelersDao terug als json object string < ---
 
         return job.build().toString();
     }
@@ -59,12 +59,12 @@ public class PersistenceManager {
 
         List<Speler> spelersList = new ArrayList<>();
 
-        /* converteer de string naar een json object */
+        // converteer de string naar een json object
         StringReader stringReader = new StringReader(jSONString);
         JsonStructure structure = Json.createReader(stringReader).read();
         JsonObject job = (JsonObject) structure;
 
-        /*Lees alle spelers uit de json string en stop ze in een spelerslist*/
+        // Lees alle spelers uit de json string en stop ze in een spelerslist
         JsonArray jab = job.getJsonArray("Spelers");
 
         for (int i = 0; i < jab.size(); i++) {
@@ -79,7 +79,7 @@ public class PersistenceManager {
             spelersList.add(newSpeler);
         }
 
-        /* alles gelezen. Nu in de SpelersDAO stoppen*/
+        // alles gelezen. Nu in de SpelersDAO stoppen
         return new SpelersDAO(job.getInt("maxID"), spelersList);
     }
 
