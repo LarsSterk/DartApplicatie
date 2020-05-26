@@ -13,9 +13,10 @@ import java.io.StringReader;
 public class SpelerService {
 
     @POST
-    @Path("/aanmaken")
+    @Path("/aanmakenRAW")
     @Produces(MediaType.APPLICATION_JSON)
-    public String createSpeler(String jsonBody) throws IOException {
+    public String createSpelerRaw(String jsonBody) throws IOException {
+        System.out.println("test: " + jsonBody);
         StringReader stringReader = new StringReader(jsonBody);
         JsonStructure structure = Json.createReader(stringReader).read();
 
@@ -39,6 +40,25 @@ public class SpelerService {
         } else {
             message = "Wrong Json format";
         }
+        return Json.createObjectBuilder().add("message", message).build().toString();
+    }
+
+    @POST
+    @Path("/aanmaken")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createSpeler(@FormParam("id") int id, @FormParam("voornaam") String voornaam, @FormParam("achternaam") String achternaam,
+                               @FormParam("leeftijd") int leeftijd, @FormParam("niveau") String niveau) throws IOException {
+        String message;
+
+
+        Speler newSpeler = new Speler(id, voornaam, achternaam, leeftijd, niveau);
+
+        if (SpelersDAO.getSpelers().addSpeler(newSpeler)) {
+            message = "Speler aangemaakt.";
+        } else {
+            message = "Speler bestaat al.";
+        }
+
         return Json.createObjectBuilder().add("message", message).build().toString();
     }
 

@@ -62,6 +62,12 @@
             <version>12.6.0</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.apache.cassandra</groupId>-->
+<!--            <artifactId>cassandra-all</artifactId>-->
+<!--            <version>3.11.6</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
