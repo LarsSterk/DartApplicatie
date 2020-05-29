@@ -107,9 +107,9 @@ public class SpelerService {
 
 
     @PUT
-    @Path("/spelerslijst/update")
+    @Path("/spelerslijst/update/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateSpeler(String jsonBody) throws IOException {
+    public String updateSpeler(@PathParam("id") int id, String jsonBody) throws IOException {
         StringReader stringReader = new StringReader(jsonBody);
         JsonStructure structure = Json.createReader(stringReader).read();
 
@@ -117,7 +117,7 @@ public class SpelerService {
 
         if (structure.getValueType() == JsonValue.ValueType.OBJECT) {
             JsonObject jsonObject = (JsonObject) structure;
-            int id = Integer.parseInt(jsonObject.getString("id"));
+            id = Integer.parseInt(jsonObject.getString("id"));
             String voornaam = jsonObject.getString("voornaam");
             String achternaam = jsonObject.getString("achternaam");
             String niveau = jsonObject.getString("niveau");

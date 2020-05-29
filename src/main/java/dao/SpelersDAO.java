@@ -43,8 +43,11 @@ public class SpelersDAO implements Serializable {
         try {
             SpelersDAO loadedDAO = PersistenceManager.loadSpelerFromAzure();
             if (loadedDAO == null) {
-                spelersList.add(new Speler(1, "Lars", "Sterk", 19, "Amateur"));
-                spelersList.add(new Speler(2, "Kaj", "Sterk", "Beginner"));
+                // Set 3 spelers hardcoded erin
+                spelersList.add(new Speler(1, "André", "Onana", 24, "Professional"));
+                spelersList.add(new Speler(2, "Virgil", "van Dijk", "Amateur"));
+                spelersList.add(new Speler(3, "Erik", "ten Hag", "Beginner"));
+
             } else {
                 this.setMaxId(loadedDAO.getMaxId());
                 this.setSpelersList(loadedDAO.getAllSpelers());
