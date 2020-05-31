@@ -17,7 +17,7 @@
 }
 
 function showSpeler(myJson) {
-    let template = document.querySelector("#accounttemplate");
+    let template = document.querySelector("#spelertemplate");
     let templateDiv = template.content.querySelector("div");
     let newDiv = document.importNode(templateDiv, true);
 
@@ -28,5 +28,9 @@ function showSpeler(myJson) {
     newDiv.querySelector(".niveau").innerText = myJson.niveau;
 
     document.querySelector("#spelerview").appendChild(newDiv);
+
+}
+
+function getSpeler() {
 
 }

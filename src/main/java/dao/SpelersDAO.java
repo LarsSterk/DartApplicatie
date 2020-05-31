@@ -82,7 +82,6 @@ public class SpelersDAO implements Serializable {
 
 
     public boolean addSpeler(Speler newSpeler) throws IOException {
-
         setMaxId(maxID + 1);
         newSpeler.setId(getMaxId());
         boolean result = spelersList.add(newSpeler);

@@ -1,73 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Start pagina</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/menu.css" type="text/css">
 </head>
 <body>
-<h1>Kies een functie: </h1>
-<ul>
-    <li><a href="/restservices/spelers/spelerslijst">Zie alle spelers.</a></li>
-    <li><a href="aanmaken.html">Speler aanmaken.</a> </li>
-</ul>
 
-<div id="resultaatPOST"></div>
-
-<hr>
-<h2>PUT: </h2>
-<h3>Speler updaten: </h3>
-<form id="PUTspelerForm">
-    <label for="idPUT">Speler id: <input type="number" id="idPUT" name="id"/></label>
-    <h4>Welke gegevens wilt u veranderen?</h4>
-    <label for="voornaamPUT">Speler voornaam: <input type="text" id="voornaamPUT" name="voornaam"/></label><br>
-    <label for="achternaamPUT">Speler achternaam: <input type="text" id="achternaamPUT" name="achternaam"/></label><br>
-    <label for="leeftijdPUT">Speler leeftijd: <input type="number" id="leeftijdPUT" name="leeftijd"/></label><br>
-    <label for="niveauPUT"> Speler niveau:
-        <select id="niveauPUT" name="niveau">
-            <option value="beginner" datatype="text">Beginner</option>
-            <option value="amateur" datatype="text">Amateur</option>
-            <option value="professional" datatype="text">Professional</option>
-        </select><br>
-    </label>
-
-    <button id="PUTnoJackson" onclick="document.getElementById('PUTspelerForm').value=''" value="Speler updaten">Speler updaten</button>
-</form>
-
-<hr>
-<h2>DELETE: </h2>
-<h3>Speler verwijderen: </h3>
-
-<form id="DELETEspelerForm">
-    <label for="idDel">Speler id: <input type="number" id="idDel" name="id"/></label>
-    <button id="DELETENoJackson" onclick="document.getElementById('DELETEspelerForm').value=''" value="Speler verwijderen" >Speler verwijderen</button>
-</form>
-
-<hr>
-
-<form id="showSpeler">
-    <input type="number" placeholder="id" id="spelertoload"/>
-    <input type="button" onclick="loadSpeler()" value="show speler"/>
-    <span id="getresponse"></span>
-</form>
-
-<template id="accounttemplate">
-    <div>
-        <label>ID:</label><label class="id"></label><br>
-        <label>Voornaam:</label><label class="voornaam"></label><br>
-        <label>Achternaam:</label><label class="achternaam"></label><br>
-        <label>Leeftijd:</label><label class="leeftijd"></label><br>
-        <label>Niveau:</label><label class="niveau"></label><br>
+<div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+        <a href="/restservices/spelers/spelerslijst">Zie alle spelers</a>
+        <a href="aanmaken.html">Speler aanmaken</a>
+        <a href="functies.html">Overige funties</a>
+        <a href="#">Contact</a>
     </div>
-</template>
+</div>
 
-<div id="spelerview"></div>
+<h2>Dart Applicatie</h2>
+<!--<img src="images/sports-and-competition.png">-->
 
-<!-- Scripts -->
-<script type="text/javascript" src="js/POSTscript.js"></script>
-<script type="text/javascript" src="js/DELETEscript.js"></script>
-<script type="text/javascript" src="js/PUTscript.js"></script>
-<script type="application/javascript" src="js/functions.js"></script>
+<!-- Menu button -->
+<span style="font-size:30px;cursor:pointer" onclick="openNav()"><img src="images/dart.png"> Menu</span>
+
+<script>
+    function openNav() {
+        document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+        document.getElementById("myNav").style.width = "0%";
+    }
+</script>
 
 </body>
-</html>/
+</html>

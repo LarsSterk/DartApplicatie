@@ -23,15 +23,9 @@ h1 {
 }
 
 input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="datetime"],
-input[type="email"],
+input[type="text"],
 input[type="number"],
-input[type="search"],
-input[type="tel"],
-input[type="time"],
-input[type="url"],
+input[type="text"],
 textarea,
 select {
     background: rgba(255,255,255,0.1);
@@ -48,11 +42,6 @@ select {
     margin-bottom: 30px;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-    margin: 0 4px 8px 0;
-}
-
 select {
     padding: 6px;
     height: 32px;
@@ -62,13 +51,13 @@ select {
 button {
     padding: 19px 39px 18px 39px;
     color: #FFF;
-    background-color: #4bc970;
+    background-color: #408bc8;
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #3ac162;
+    border: 1px solid #408bc8;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
