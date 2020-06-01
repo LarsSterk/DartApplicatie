@@ -16,7 +16,6 @@ public class SpelerService {
     @Path("/aanmakenRAW")
     @Produces(MediaType.APPLICATION_JSON)
     public String createSpelerRaw(String jsonBody) throws IOException {
-        System.out.println("test: " + jsonBody);
         StringReader stringReader = new StringReader(jsonBody);
         JsonStructure structure = Json.createReader(stringReader).read();
 
@@ -72,11 +71,11 @@ public class SpelerService {
         for (Speler speler : spelersDAO.getAllSpelers()) {
             JsonObjectBuilder job = Json.createObjectBuilder();
 
-            job.add("id: ", speler.getId());
-            job.add("voornaam:", speler.getVoornaam());
-            job.add("achternaam: ", speler.getAchternaam());
-            job.add("leeftijd: ", speler.getLeeftijd());
-            job.add("niveau: ", speler.getNiveau());
+            job.add("id", speler.getId());
+            job.add("voornaam", speler.getVoornaam());
+            job.add("achternaam", speler.getAchternaam());
+            job.add("leeftijd", speler.getLeeftijd());
+            job.add("niveau", speler.getNiveau());
 
             jab.add(job);
         }
@@ -93,11 +92,11 @@ public class SpelerService {
         Speler speler = SpelersDAO.getSpelers().getSpelerById(id);
         JsonObjectBuilder job = Json.createObjectBuilder();
 
-        job.add("id: ", speler.getId());
-        job.add("voornaam:", speler.getVoornaam());
-        job.add("achternaam: ", speler.getAchternaam());
-        job.add("leeftijd: ", speler.getLeeftijd());
-        job.add("niveau: ", speler.getNiveau());
+        job.add("id", speler.getId());
+        job.add("voornaam", speler.getVoornaam());
+        job.add("achternaam", speler.getAchternaam());
+        job.add("leeftijd", speler.getLeeftijd());
+        job.add("niveau", speler.getNiveau());
 
         jab.add(job);
         JsonArray array = jab.build();

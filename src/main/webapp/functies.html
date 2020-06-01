@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Start pagina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overige functies</title>
     <link rel="stylesheet" href="css/functies.css" type="text/css" />
 </head>
 <body>
@@ -10,8 +11,10 @@
 
 <ul id="navbar">
     <li><a href="index.html">Home menu</a> </li>
-    <li><a href="/restservices/spelers/spelerslijst">Zie alle spelers.</a></li>
-    <li><a href="aanmaken.html">Speler aanmaken.</a> </li>
+    <li><a href="spelersLijst.html">Zie alle spelers</a></li>
+    <li><a href="aanmaken.html">Speler aanmaken</a> </li>
+    <li><a href="handleiding.html">Handleiding</a> </li>
+
 </ul>
 
 <div id="resultaatPOST"></div>
@@ -47,29 +50,10 @@
 
 <hr>
 
-<form id="showSpeler">
-    <input type="number" placeholder="id" id="spelertoload"/>
-    <input type="button" onclick="loadSpeler()" value="show speler"/>
-    <span id="getresponse"></span>
-</form>
-
-<template id="spelertemplate">
-    <div>
-        <label>ID:</label><label class="id"></label><br>
-        <label>Voornaam:</label><label class="voornaam"></label><br>
-        <label>Achternaam:</label><label class="achternaam"></label><br>
-        <label>Leeftijd:</label><label class="leeftijd"></label><br>
-        <label>Niveau:</label><label class="niveau"></label><br>
-    </div>
-</template>
-
-<div id="spelerview"></div>
-
 <!-- Scripts -->
 <script type="text/javascript" src="js/POSTscript.js"></script>
 <script type="text/javascript" src="js/DELETEscript.js"></script>
 <script type="text/javascript" src="js/PUTscript.js"></script>
-<script type="application/javascript" src="js/functions.js"></script>
 
 </body>
 </html>/

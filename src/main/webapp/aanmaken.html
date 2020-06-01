@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speler aanmaken</title>
     <link rel="stylesheet" href="css/create.css">
-    <!--    <link rel="stylesheet" href="css/style.css">-->
 </head>
 <body>
 
-<form id="POSTspelerForm" action="index.html">
+<form id="POSTspelerForm" name="aanmaken" action="index.html">
     <h1>Speler aanmaken: </h1>
 
     <fieldset>
         <legend><span class="number"></span>Gegevens</legend>
-        <label for="voornaam">Voornaam:<input type="text" id="voornaam" name="voornaam"></label>
+        <label for="voornaam">Voornaam:<input type="text" id="voornaam" name="voornaam" required></label>
 
-        <label for="achternaam">Achternaam:<input type="text" id="achternaam" name="achternaam"></label>
+        <label for="achternaam">Achternaam:<input type="text" id="achternaam" name="achternaam" required></label>
 
         <label for="leeftijd">Leeftijd:<input type="number" id="leeftijd" name="leeftijd"></label>
 
@@ -30,8 +29,13 @@
     </fieldset>
 
     <button id="postNoJackson" value="Speler aanmaken">Speler aanmaken</button>
-    <button id="backBtn" value="Terug" onclick="">Terug</button>
 </form>
+
+<form action="index.html">
+    <button id="backBtn" value="Terug">Terug</button>
+
+</form>
+
 
 <!-- Scripts -->
 <script type="text/javascript" src="js/POSTscript.js"></script>
