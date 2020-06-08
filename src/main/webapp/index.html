@@ -7,13 +7,22 @@
 </head>
 <body>
 
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=index.html");
+    }
+</script>
+
 <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="overlay-content">
         <a href="spelersLijst.html">Spelers overzicht</a>
-        <a href="aanmaken.html">Speler aanmaken</a>
+        <a href="spelerAanmaken.html">Speler aanmaken</a>
         <a href="functies.html">Overige funties</a>
-        <a href="handleiding.html">Handleiding</a>
+        <a href="applicatieHandleiding.html">Handleiding</a>
     </div>
 </div>
 

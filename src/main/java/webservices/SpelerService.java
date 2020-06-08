@@ -3,6 +3,7 @@ package webservices;
 import dao.SpelersDAO;
 import model.Speler;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -44,6 +45,7 @@ public class SpelerService {
 
     @POST
     @Path("/aanmaken")
+    @RolesAllowed({"speler","beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String createSpeler(@FormParam("id") int id, @FormParam("voornaam") String voornaam, @FormParam("achternaam") String achternaam,
                                @FormParam("leeftijd") int leeftijd, @FormParam("niveau") String niveau) throws IOException {
@@ -63,6 +65,7 @@ public class SpelerService {
 
     @GET
     @Path("/spelerslijst")
+    @RolesAllowed({"speler", "beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllSpelers() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -86,6 +89,7 @@ public class SpelerService {
 
     @GET
     @Path("/spelerslijst/{id}")
+    @RolesAllowed({"speler", "beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String getSpelerById(@PathParam("id") int id) {
         JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -107,6 +111,7 @@ public class SpelerService {
 
     @PUT
     @Path("/spelerslijst/update/{id}")
+    @RolesAllowed({"speler", "beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String updateSpeler(@PathParam("id") int id, String jsonBody) throws IOException {
         StringReader stringReader = new StringReader(jsonBody);
@@ -137,6 +142,7 @@ public class SpelerService {
 
     @DELETE
     @Path("/spelerslijst/{id}")
+    @RolesAllowed({"beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteSpeler(@PathParam("id") int id) throws IOException {
         String message = "Wrong json format";
