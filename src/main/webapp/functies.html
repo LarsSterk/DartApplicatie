@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overige functies</title>
     <link rel="stylesheet" href="css/functies.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 <body>
+
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=functies.html");
+    }
+</script>
+
 <h1>Kies een functie: </h1>
 
 <ul id="navbar">

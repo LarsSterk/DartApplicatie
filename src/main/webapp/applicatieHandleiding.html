@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handleiding</title>
     <link rel="stylesheet" href="css/handleiding.css" type="text/css">
+    <link rel="stylesheet" href="css/navbar.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
+
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=applicatieHandleiding.html");
+    }
+</script>
 
 <ul id="navbar">
     <li><a href="index.html">Home menu</a> </li>

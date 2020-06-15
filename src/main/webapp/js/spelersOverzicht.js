@@ -6,14 +6,18 @@ function getSpelersLijst() {
         })
         .then(function (data) {
             //debugger;
-            var replaceHTML ="";
+            let replaceHTML ="";
             //Verwerk het json antwoord van de service in een tabel (via de array van spelers)
-            var spelerArr = data;
+            let spelerArr = data;
             //per array rij een speler
-            for (var i = 0; i < spelerArr.length; i++) {
-                var spelerObj = spelerArr[i];
-                replaceHTML += "<tr><td>"+spelerObj.id +"</td><td>"+spelerObj.voornaam+ "</td><td>"+spelerObj.achternaam+"</td><td>"+spelerObj.leeftijd+"</td><td>"+spelerObj.niveau+"</td></tr>";
-            };
+            let btn = document.createElement('input');
+            btn.type = "button";
+            btn.className = "btn";
+            // btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
+            for (let i = 0; i < spelerArr.length; i++) {
+                let spelerObj = spelerArr[i];
+                replaceHTML += "<tr><td>"+spelerObj.id +"</td><td>"+spelerObj.voornaam+ "</td><td>"+spelerObj.achternaam+"</td><td>"+spelerObj.leeftijd+"</td><td>"+spelerObj.niveau+ "</td></tr>";
+            }
             //Vervang de rijen in de html met de nieuwe rijen
             document.getElementById("Spelers").innerHTML = replaceHTML;
 

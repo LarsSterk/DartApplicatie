@@ -10,3 +10,20 @@ document.querySelector('#PUTnoJackson').addEventListener("click", function () {
         });
 
 });
+
+
+
+function open() {
+    const updateSpelerButton = document.getElementById('open-dialog-btn');
+    const updateDialog = document.getElementById('updateDialog');
+
+// addCityButton event listener om de dialog te tonen wanneer er op de button addCityButton geklikt word
+    updateSpelerButton.addEventListener('click', function onOpen() {
+        if (typeof updateDialog.showModal === "function"){
+            updateDialog.showModal();
+        }else{
+            alert("Dialog not supported.") // Als er niks getoond kan worden komt er een error message.
+        }
+    })
+
+}

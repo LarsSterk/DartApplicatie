@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+</head>
+<body>
+
+<div class="box">
+    <select id="selectSpeler" name="speler_naam">
+        <!-- Hier komen de spelers uit het overzicht -->
+        <option disabled selected value="">Selecteer een speler</option>
+    </select>
+</div>
+
+
+
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=spelerUpdaten.html");
+    }
+</script>
+
+<ul id="navbar">
+    <li><a href="index.html">Home menu</a></li>
+</ul>
+
+
+</body>
+</html>

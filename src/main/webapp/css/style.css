@@ -1,0 +1,16 @@
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+dialog {
+    top: 4em;
+    margin: 0 auto;
+    /*max-width: calc(100% - 2 * var(--spacing));*/
+    /*padding: var(--spacing-large) var(--spacing);*/
+    /*border: var(--border);*/
+    /*box-shadow: var(--box-shadow);*/
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}

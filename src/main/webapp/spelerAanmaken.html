@@ -4,11 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speler aanmaken</title>
-    <link rel="stylesheet" href="css/create.css">
+    <link rel="stylesheet" href="css/create.css" type="text/css">
+    <link rel="stylesheet" href="css/navbar.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 <body>
 
-<form id="POSTspelerForm" name="aanmaken" action="index.html">
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=spelerAanmaken.html");
+    }
+</script>
+
+<ul id="navbar">
+    <li><a href="index.html">Home menu</a> </li>
+</ul>
+
+<form id="POSTspelerForm" name="aanmaken">
     <h1>Speler aanmaken: </h1>
 
     <fieldset>
@@ -28,8 +44,9 @@
         </label>
     </fieldset>
 
-    <button id="postNoJackson" value="Speler aanmaken">Speler aanmaken</button>
 </form>
+
+<button id="postNoJackson" value="Speler aanmaken">Speler aanmaken</button>
 
 <form action="index.html">
     <button id="backBtn" value="Terug">Terug</button>
