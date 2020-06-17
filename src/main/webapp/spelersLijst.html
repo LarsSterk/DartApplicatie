@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/table.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/navbar.css" type="text/css">
+    <link rel="stylesheet" href="css/dialog.css" type="text/css">
     <title>Spelerslijst</title>
 </head>
 <body>
@@ -20,14 +21,17 @@
 </script>
 
 <ul id="navbar">
-    <li><a href="index.html">Home menu</a> </li>
-    <li><a href="applicatieHandleiding.html">Handleiding</a> </li>
+    <li><a href="index.html">Home menu</a></li>
+    <li><a href="applicatieHandleiding.html">Handleiding</a></li>
+    <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>
 </ul>
 
 
 <!-- Scripts -->
 <script type="text/javascript" src="js/spelersOverzicht.js"></script>
 <script type="text/javascript" src="js/spelerUpdaten.js"></script>
+<script type="text/javascript" src="js/verwijderSpeler.js"></script>
+
 
 <h1>Overzicht van spelers (voor testen)</h1>
 
@@ -48,80 +52,48 @@
 
     </tbody>
 </table>
+<br>
 <!--<label for="idPUT">Speler id: <input type="number" id="idPUT" name="id"/></label>-->
 <button id="open-dialog-btn">Update Speler</button>
 
 <dialog id="updateDialog">
     <form id="PUTspelerForm">
-        <label for="idPUT">Speler id: <input type="number" id="idPUT" name="id"/></label>
-        <h4>Welke gegevens wilt u veranderen?</h4>
-        <label for="voornaamPUT">Speler voornaam: <input type="text" id="voornaamPUT" name="voornaam"/></label><br>
-        <label for="achternaamPUT">Speler achternaam: <input type="text" id="achternaamPUT" name="achternaam"/></label><br>
-        <label for="leeftijdPUT">Speler leeftijd: <input type="number" id="leeftijdPUT" name="leeftijd"/></label><br>
-        <label for="niveauPUT"> Speler niveau:
-            <select id="niveauPUT" name="niveau">
-                <option value="beginner" datatype="text">Beginner</option>
-                <option value="amateur" datatype="text">Amateur</option>
-                <option value="professional" datatype="text">Professional</option>
-            </select><br>
-        </label>
-        <button id="PUTnoJackson" onclick="document.getElementById('PUTspelerForm').value=''" value="Speler updaten">Speler updaten</button>
+        <fieldset>
+            <label for="idPUT">Speler id: <input type="number" id="idPUT" name="id"/></label>
+            <h4>Welke gegevens wilt u veranderen?</h4>
+            <label for="voornaamPUT">Speler voornaam: <input type="text" id="voornaamPUT" name="voornaam"/></label><br>
+            <label for="achternaamPUT">Speler achternaam: <input type="text" id="achternaamPUT"
+                                                                 name="achternaam"/></label><br>
+            <label for="leeftijdPUT">Speler leeftijd: <input type="number" id="leeftijdPUT"
+                                                             name="leeftijd"/></label><br>
+            <label for="niveauPUT"> Speler niveau:
+                <select id="niveauPUT" name="niveau">
+                    <option value="beginner" datatype="text">Beginner</option>
+                    <option value="amateur" datatype="text">Amateur</option>
+                    <option value="professional" datatype="text">Professional</option>
+                </select><br>
+            </label>
+            <button id="PUTnoJackson" value="Speler updaten">Speler updaten</button>
+        </fieldset>
     </form>
 
 </dialog>
 
+<button id="verwijder-btn">Verwijder Speler</button>
 
-<!--<div id="add-speler-dialog">-->
-
-<!--    <dialog id="speler-dialog">-->
-<!--        <div class="heading">-->
-<!--            <h2>Update speler</h2>-->
-<!--            <small><span class="required">*</span> are required fields</small>-->
-<!--        </div>-->
-
-<!--        <form class="update-speler-form" id="update-speler-form">-->
-
-<!--            <label for="city-input">City: <span class="required">*</span></label>-->
-<!--            <input type="text" id="city-input" name="city" required/>-->
-
-<!--            <label for="image-input">-->
-<!--                Image: <span class="required">*</span>-->
-<!--                <small>The image should have an aspect ratio of 3:2 and a minimum width of 986px.</small>-->
-<!--            </label>-->
-<!--            <input type="file" id="image-input" name="image" required/>-->
-
-<!--            <label for="date-input">Date: <span class="required">*</span></label>-->
-<!--            <input type="date" id="date-input" name="date" required/>-->
-
-<!--            <label for="review-input">Review: <span class="required">*</span></label>-->
-<!--            <textarea id="review-input" name="review" required></textarea>-->
-
-<!--            &lt;!&ndash;-->
-<!--                Voeg hier de code voor opdracht 3 toe-->
-<!--            &ndash;&gt;-->
-
-<!--            &lt;!&ndash; Input bar waar minimaal 1 en maximaal 5 kan worden ingevuld. &ndash;&gt;-->
-<!--            <label for="rating-input">Rating: <span class="required">*</span> </label>-->
-<!--            <input placeholder="Rating 1 / 5" type="number" id="rating-input" name="rating" min="1" max="5" required/>-->
-
-<!--            <button type="submit" class="button" id="add-city-button">-->
-<!--                Add city-->
-<!--            </button>-->
-<!--            <button type="button" class="secondary-button js-cancel-city-button" id="cancel-button">-->
-<!--                Annuleren-->
-<!--            </button>-->
-<!--        </form>-->
-<!--    </dialog>-->
-
-<!--</div>-->
-
-
+<dialog id="delete-dialog">
+    <form id="DELETEspelerForm">
+        <label for="idDel">Speler id: <input type="number" id="idDel" name="id"/></label>
+    </form>
+    <button id="DELETENoJackson" value="Speler verwijderen">Speler verwijderen</button>
+</dialog>
 
 <script>
     getSpelersLijst();
-</script>
-<script>
-    open();
+    openUpdateDialog();
+    openDeleteDialog();
+    verwijderSpeler();
+    updateSpeler();
 </script>
 
 

@@ -22,6 +22,8 @@
 
 <ul id="navbar">
     <li><a href="index.html">Home menu</a> </li>
+    <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>
+
 </ul>
 
 <form id="POSTspelerForm" name="aanmaken">
@@ -29,9 +31,12 @@
 
     <fieldset>
         <legend><span class="number"></span>Gegevens</legend>
-        <label for="voornaam">Voornaam:<input type="text" id="voornaam" name="voornaam" required></label>
+        <small><span class="required">*</span> are required fields</small>
+        <label for="voornaam">Voornaam: <span class="required">*</span></label>
+        <input type="text" id="voornaam" name="voornaam" required>
 
-        <label for="achternaam">Achternaam:<input type="text" id="achternaam" name="achternaam" required></label>
+        <label for="achternaam">Achternaam: <span class="required">*</span></label>
+            <input type="text" id="achternaam" name="achternaam" required>
 
         <label for="leeftijd">Leeftijd:<input type="number" id="leeftijd" name="leeftijd"></label>
 
@@ -45,8 +50,11 @@
     </fieldset>
 
 </form>
+<button id="postNoJackson" value="Speler aanmaken" onclick="alert('Speler aangemaakt.')">Speler aanmaken</button>
 
-<button id="postNoJackson" value="Speler aanmaken">Speler aanmaken</button>
+<dialog id="gelukt">
+    <label>Gelukt!</label>
+</dialog>
 
 <form action="index.html">
     <button id="backBtn" value="Terug">Terug</button>
