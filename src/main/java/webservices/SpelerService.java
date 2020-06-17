@@ -113,19 +113,13 @@ public class SpelerService {
     @Path("/spelerslijst/update/{id}")
     @RolesAllowed({"speler", "beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateSpeler(@PathParam("id") int id, String jsonBody) throws IOException {
-        StringReader stringReader = new StringReader(jsonBody);
-        JsonStructure structure = Json.createReader(stringReader).read();
+
+
+
+        public String updateSpeler(@PathParam("id") int id, @FormParam("voornaam") String voornaam, @FormParam("achternaam") String achternaam,
+                                   @FormParam("leeftijd") int leeftijd, @FormParam("niveau") String niveau) throws IOException {
 
         String message;
-
-        if (structure.getValueType() == JsonValue.ValueType.OBJECT) {
-            JsonObject jsonObject = (JsonObject) structure;
-            id = Integer.parseInt(jsonObject.getString("id"));
-            String voornaam = jsonObject.getString("voornaam");
-            String achternaam = jsonObject.getString("achternaam");
-            String niveau = jsonObject.getString("niveau");
-            int leeftijd = Integer.parseInt(jsonObject.getString("leeftijd"));
 
             Speler newSpeler = new Speler(id, voornaam, achternaam, leeftijd, niveau);
 
@@ -134,14 +128,12 @@ public class SpelerService {
             } else {
                 message = "Speler bestaat al.";
             }
-        } else {
-            message = "Wrong Json format";
-        }
+
         return Json.createObjectBuilder().add("message", message).build().toString();
     }
 
     @DELETE
-    @Path("/spelerslijst/{id}")
+    @Path("/spelerslijst/delete/{id}")
     @RolesAllowed({"beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteSpeler(@PathParam("id") int id) throws IOException {

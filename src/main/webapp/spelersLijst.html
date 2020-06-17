@@ -59,7 +59,10 @@
 <dialog id="updateDialog">
     <form id="PUTspelerForm">
         <fieldset>
-            <label for="idPUT">Speler id: <input type="number" id="idPUT" name="id"/></label>
+            <label for="idPUT">Speler id: <select id="idPUT" name="id" autofocus>
+                <option value="-Selecteer ID-">-Selecteer ID-</option>
+                <!-- Hier komen de ids uit het overzicht te staan -->
+            </select></label>
             <h4>Welke gegevens wilt u veranderen?</h4>
             <label for="voornaamPUT">Speler voornaam: <input type="text" id="voornaamPUT" name="voornaam"/></label><br>
             <label for="achternaamPUT">Speler achternaam: <input type="text" id="achternaamPUT"
@@ -68,14 +71,16 @@
                                                              name="leeftijd"/></label><br>
             <label for="niveauPUT"> Speler niveau:
                 <select id="niveauPUT" name="niveau">
-                    <option value="beginner" datatype="text">Beginner</option>
-                    <option value="amateur" datatype="text">Amateur</option>
-                    <option value="professional" datatype="text">Professional</option>
+                    <option value="Beginner" datatype="text">Beginner</option>
+                    <option value="Amateur" datatype="text">Amateur</option>
+                    <option value="Professional" datatype="text">Professional</option>
                 </select><br>
             </label>
-            <button id="PUTnoJackson" value="Speler updaten">Speler updaten</button>
+
         </fieldset>
     </form>
+    <button id="PUTnoJackson" value="Speler updaten" onclick="updateSpeler()">Speler updaten</button>
+    <button id="upBackBtn" value="Terug">Terug</button>
 
 </dialog>
 
@@ -83,17 +88,24 @@
 
 <dialog id="delete-dialog">
     <form id="DELETEspelerForm">
-        <label for="idDel">Speler id: <input type="number" id="idDel" name="id"/></label>
+        <label for="idDel">Speler id: <select id="idDel" name="id" autofocus>
+            <option value="-Selecteer ID-">-Selecteer ID-</option>
+            <!-- Hier komen de ids uit het overzicht te staan -->
+        </select></label>
     </form>
-    <button id="DELETENoJackson" value="Speler verwijderen">Speler verwijderen</button>
+    <button id="DELETENoJackson" value="Speler verwijderen" onclick="verwijderSpeler()">Speler verwijderen</button>
+    <button id="delBackBtn" value="Terug">Terug</button>
+
 </dialog>
 
 <script>
+
     getSpelersLijst();
     openUpdateDialog();
     openDeleteDialog();
-    verwijderSpeler();
-    updateSpeler();
+    closeUpdateDialog();
+    closeDeleteDialog();
+
 </script>
 
 

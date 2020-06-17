@@ -92,8 +92,24 @@ public class SpelersDAO implements Serializable {
     public boolean updateSpeler(Speler upSpeler) throws IOException {
         for (Speler speler : spelersList){
             if (speler.getId() == upSpeler.getId()){
+
                 int index = spelersList.indexOf(speler);
-                spelersList.set(index, upSpeler);
+                if (!(upSpeler.getVoornaam().equals(""))){
+                    speler.setVoornaam(upSpeler.getVoornaam());
+                }
+                if (!(upSpeler.getAchternaam().equals(""))){
+                    speler.setAchternaam(upSpeler.getAchternaam());
+                }
+
+                if (!(upSpeler.getLeeftijd() == 0 )){
+                    speler.setLeeftijd(upSpeler.getLeeftijd());
+                }
+
+                if (!(upSpeler.getNiveau().equals(speler.getNiveau()) )){
+                    speler.setNiveau(upSpeler.getNiveau());
+                }
+
+                spelersList.set(index, speler);
                 PersistenceManager.saveSpelerToAzure(spelersDAO);
                 return true;
             }

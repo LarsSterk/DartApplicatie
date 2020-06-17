@@ -1,8 +1,7 @@
 function verwijderSpeler() {
-    document.querySelector('#DELETENoJackson').addEventListener("click", function () {
         let id = document.querySelector("#idDel").value;
 
-        fetch("/restservices/spelers/spelerslijst/" + id, {
+        fetch("/restservices/spelers/spelerslijst/delete/" + id, {
             method: "DELETE",
             headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}
         })
@@ -22,5 +21,5 @@ function verwijderSpeler() {
             });
 
         let input = document.getElementById(id).value;
-    });
+
 }
