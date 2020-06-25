@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="css/menu.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/navbar.css" type="text/css">
+    <link rel="stylesheet" href="css/dialog.css" type="text/css">
+
 
     <title>Hoofdmenu</title>
 </head>
@@ -24,14 +26,39 @@
     }
 </script>
 
+<script type="text/javascript" src="js/index.js"></script>
+
+
 <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="overlay-content">
-        <a href="spelersLijst.html">Spelers overzicht</a>
+        <a href="spelersOverzicht.html">Spelers overzicht</a>
         <a href="spelerAanmaken.html">Speler aanmaken</a>
         <a href="applicatieHandleiding.html">Handleiding</a>
+        <a id="nieuw-spel">Nieuw Spel</a>
     </div>
 </div>
+
+<dialog id="nieuw-spel-dialog">
+    <script type="text/javascript" src="js/spelersOverzicht.js"></script>
+
+    <form id="spelForm">
+        <label for="idSpeler1">Speler 1 id: <select id="idSpeler1" name="id1" autofocus>
+            <option value="-Selecteer ID-">-Selecteer ID-</option>
+            <!-- Hier komen de ids uit het overzicht te staan -->
+        </select></label>
+
+        <label for="idSpeler2">Speler 2 id: <select id="idSpeler2" name="id2" autofocus>
+            <option value="-Selecteer ID-">-Selecteer ID-</option>
+            <!-- Hier komen de ids uit het overzicht te staan -->
+        </select></label>
+
+    </form>
+    <button id="startSpel" value="Start spel" onclick="window.location.href='spel.html'" >Start spel</button>
+    <button id="backBtn" value="Terug">Terug</button>
+
+    <script> getSpelersLijst() </script>
+</dialog>
 
 <h2>Dart Applicatie</h2>
 
@@ -46,6 +73,9 @@
     function closeNav() {
         document.getElementById("myNav").style.width = "0%";
     }
+
+    openNieuwSpelDialog();
+    closeSpelDialog();
 </script>
 
 </body>

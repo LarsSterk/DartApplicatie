@@ -14,7 +14,7 @@ function updateSpeler() {
             .then(response => response.json())
             .then(function (myJson) {
                 alert("Speler succesvol geupdate")
-                window.location.replace("spelersLijst.html")})
+                window.location.replace("spelersOverzicht.html")})
             .catch(function (err) {
                 console.log('error: ' + err);
                 alert("Speler heeft geen toegang.")

@@ -10,7 +10,7 @@ function verwijderSpeler() {
             })
             .then(function (data) {
                 alert("Speler succesvol verwijderd")
-                window.location.replace("spelersLijst.html")
+                window.location.replace("spelersOverzicht.html")
 
 
             })

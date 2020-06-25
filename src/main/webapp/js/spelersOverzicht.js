@@ -31,7 +31,13 @@ function getSpelersLijst() {
                 opt2.value = spelerObj.id;
                 opt2.innerHTML = spelerObj.id + " " + spelerObj.voornaam+ " "+ spelerObj.achternaam;
                 document.getElementById('idDel').appendChild(opt2);
+                // document.getElementById('idSpeler1').appendChild(opt2);
+                // document.getElementById('idSpeler2').appendChild(opt2);
 
+                // let opt3 = document.createElement('option');
+                // opt3.value = spelerObj.id;
+                // opt3.innerHTML = spelerObj.id + " " + spelerObj.voornaam+ " "+ spelerObj.achternaam;
+                // document.getElementById('idSpeler1').appendChild(opt3);
 
             }
             //Vervang de rijen in de html met de nieuwe rijen
