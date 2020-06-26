@@ -1,0 +1,118 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Darts</title>-->
+<!--    <link rel="stylesheet" href="css/style.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/spel.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/navbar.css" type="text/css">-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<script type="text/javascript" src="js/spel.js"></script>-->
+<!--&lt;!&ndash;<ul id="navbar">&ndash;&gt;-->
+<!--&lt;!&ndash;    <li><a href="index.html">Home menu</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li><a href="applicatieHandleiding.html">Handleiding</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;</ul>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;<h2>Dart spel 501</h2>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div class="grid-container">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="Speler-1" style="background-color: #aaa;">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h1>Speler 1</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;        <h2 id="punten">501</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="punten1">Score:<input type="number" id="punten1" name="punten1"></label>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <div class="form-group col-lg-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="totalval">Total Price</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" name="totalval" class="form-control" id="totalval" onchange="updateDue()" disabled="disabled" value="501">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group col-lg-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="inideposit">Initial Deposit</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" name="inideposit" class="form-control" id="inideposit" onchange="updateDue()">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group col-lg-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="remainingval">Outstanding Dues</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" name="remainingval" class="form-control" id="remainingval">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="Speler-2" style="background-color:#bbb;">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h1>Speler 2</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="punten2">Score:<input type="number" id="punten2" name="punten2" placeholder="&#45;&#45; SCORE &#45;&#45;"></label>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+<!--&lt;!&ndash;    function updateDue() {&ndash;&gt;-->
+
+<!--&lt;!&ndash;        var total = parseInt(document.getElementById("totalval").value);&ndash;&gt;-->
+<!--&lt;!&ndash;        // let total = parseInt(document.getElementById("punten").value);&ndash;&gt;-->
+<!--&lt;!&ndash;        var val2 = parseInt(document.getElementById("inideposit").value);&ndash;&gt;-->
+
+<!--&lt;!&ndash;        // to make sure that they are numbers&ndash;&gt;-->
+<!--&lt;!&ndash;        if (!total) { total = 0; }&ndash;&gt;-->
+<!--&lt;!&ndash;        if (!val2) { val2 = 0; }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        var ansD = document.getElementById("remainingval");&ndash;&gt;-->
+<!--&lt;!&ndash;        ansD.value = total - val2;&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+<!--<div class="layout">-->
+<!--    <div class="column column&#45;&#45;score column&#45;&#45;active">-->
+<!--        <h5 class="player-name">Player 1</h5>-->
+<!--        <h2 class="score">501</h2>-->
+<!--        <div class="list list&#45;&#45;outs">-->
+<!--            <h6 class="list__title">Possible outs:</h6>-->
+<!--            <ul class="list__items">-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="list list&#45;&#45;rounds">-->
+<!--            <h6 class="list__title">Previous scores:</h6>-->
+<!--            <ul class="list__items">-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="column">-->
+<!--        <button id="js-start" class="button">Restart</button>-->
+<!--        <div class="num-pad">-->
+<!--            <input class="num-pad__display" readonly/>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">1</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">2</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">3</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">4</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">5</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">6</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">7</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">8</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">9</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;clear">Clear</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;numeric">0</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;delete">Delete</button>-->
+<!--            <button class="num-pad__button num-pad__button&#45;&#45;submit">Submit</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="column column&#45;&#45;score">-->
+<!--        <h5 class="player-name">Player 2</h5>-->
+<!--        <h2 class="score">501</h2>-->
+<!--        <div class="list list&#45;&#45;outs">-->
+<!--            <h6 class="list__title">Possible outs:</h6>-->
+<!--            <ul class="list__items">-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="list list&#45;&#45;rounds">-->
+<!--            <h6 class="list__title">Previous scores:</h6>-->
+<!--            <ul class="list__items">-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

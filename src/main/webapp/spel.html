@@ -2,117 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Darts</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/spel.css" type="text/css">
-    <link rel="stylesheet" href="css/navbar.css" type="text/css">
-
+    <title>Darts 501</title>
+    <script type="text/javascript" src="js/spel.js"></script>
 </head>
 <body>
-<script type="text/javascript" src="js/spel.js"></script>
-<!--<ul id="navbar">-->
-<!--    <li><a href="index.html">Home menu</a></li>-->
-<!--    <li><a href="applicatieHandleiding.html">Handleiding</a></li>-->
-<!--    <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>-->
-<!--</ul>-->
+<div class="score-counter">
 
+    <div id="player-data">
 
-<!--<h2>Dart spel 501</h2>-->
+        <input type="text" id="p1" placeholder="Enter player1" required><br>
+        <input type="text" id="p2" placeholder="Enter player2" required><br>
+        <button id="start" onclick="startGame()">start</button>
 
-<!--<div class="grid-container">-->
-<!--    <div class="Speler-1" style="background-color: #aaa;">-->
-<!--        <h1>Speler 1</h1>-->
-<!--        <h2 id="punten">501</h2>-->
-<!--        <label for="punten1">Score:<input type="number" id="punten1" name="punten1"></label>-->
-
-<!--        <div class="form-group col-lg-6">-->
-<!--            <label for="totalval">Total Price</label>-->
-<!--            <input type="text" name="totalval" class="form-control" id="totalval" onchange="updateDue()" disabled="disabled" value="501">-->
-<!--        </div>-->
-<!--        <div class="form-group col-lg-6">-->
-<!--            <label for="inideposit">Initial Deposit</label>-->
-<!--            <input type="text" name="inideposit" class="form-control" id="inideposit" onchange="updateDue()">-->
-<!--        </div>-->
-<!--        <div class="form-group col-lg-6">-->
-<!--            <label for="remainingval">Outstanding Dues</label>-->
-<!--            <input type="text" name="remainingval" class="form-control" id="remainingval">-->
-<!--        </div>-->
-
-
-<!--    </div>-->
-<!--    <div class="Speler-2" style="background-color:#bbb;">-->
-<!--        <h1>Speler 2</h1>-->
-<!--        <label for="punten2">Score:<input type="number" id="punten2" name="punten2" placeholder="&#45;&#45; SCORE &#45;&#45;"></label>-->
-
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<script>-->
-<!--    function updateDue() {-->
-
-<!--        var total = parseInt(document.getElementById("totalval").value);-->
-<!--        // let total = parseInt(document.getElementById("punten").value);-->
-<!--        var val2 = parseInt(document.getElementById("inideposit").value);-->
-
-<!--        // to make sure that they are numbers-->
-<!--        if (!total) { total = 0; }-->
-<!--        if (!val2) { val2 = 0; }-->
-
-<!--        var ansD = document.getElementById("remainingval");-->
-<!--        ansD.value = total - val2;-->
-<!--    }-->
-<!--</script>-->
-
-<div class="layout">
-    <div class="column column--score column--active">
-        <h5 class="player-name">Player 1</h5>
-        <h2 class="score">501</h2>
-        <div class="list list--outs">
-            <h6 class="list__title">Possible outs:</h6>
-            <ul class="list__items">
-            </ul>
-        </div>
-        <div class="list list--rounds">
-            <h6 class="list__title">Previous scores:</h6>
-            <ul class="list__items">
-            </ul>
-        </div>
     </div>
-    <div class="column">
-        <button id="js-start" class="button">Restart</button>
-        <div class="num-pad">
-            <input class="num-pad__display" readonly/>
-            <button class="num-pad__button num-pad__button--numeric">1</button>
-            <button class="num-pad__button num-pad__button--numeric">2</button>
-            <button class="num-pad__button num-pad__button--numeric">3</button>
-            <button class="num-pad__button num-pad__button--numeric">4</button>
-            <button class="num-pad__button num-pad__button--numeric">5</button>
-            <button class="num-pad__button num-pad__button--numeric">6</button>
-            <button class="num-pad__button num-pad__button--numeric">7</button>
-            <button class="num-pad__button num-pad__button--numeric">8</button>
-            <button class="num-pad__button num-pad__button--numeric">9</button>
-            <button class="num-pad__button num-pad__button--clear">Clear</button>
-            <button class="num-pad__button num-pad__button--numeric">0</button>
-            <button class="num-pad__button num-pad__button--delete">Delete</button>
-            <button class="num-pad__button num-pad__button--submit">Submit</button>
-        </div>
-    </div>
-    <div class="column column--score">
-        <h5 class="player-name">Player 2</h5>
-        <h2 class="score">501</h2>
-        <div class="list list--outs">
-            <h6 class="list__title">Possible outs:</h6>
-            <ul class="list__items">
-            </ul>
-        </div>
-        <div class="list list--rounds">
-            <h6 class="list__title">Previous scores:</h6>
-            <ul class="list__items">
-            </ul>
-        </div>
+
+
+    <div id="score">
+        <select id="maxscore">
+
+            <option value="">Set winning score</option>
+            <option value="501">501</option>
+<!--            <option value="20">501</option>-->
+<!--            <option value="30">501</option>-->
+
+        </select><br>
+        <p id="inc1">0</p>
+        <span id="to">:</span>
+        <p id="inc2">0</p><br>
+
+
+        <input type="button" id="Player1" onclick="player1()" value="player1"></button>
+        <input type="button" id="Player2" onclick="player2()" value="player2"></button>
+        <button id="reset" onclick="reset()">Reset</button>
+
     </div>
 </div>
-
 </body>
 </html>

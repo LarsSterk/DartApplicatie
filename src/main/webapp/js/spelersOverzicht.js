@@ -1,5 +1,4 @@
 function getSpelersLijst() {
-
     fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
         .then(function (response) {
             return response.json();
@@ -66,7 +65,7 @@ function openUpdateDialog() {
 
     document.querySelector('#idPUT').addEventListener("change", function () {
         let selectedId = document.querySelector("#idPUT").value;
-
+debugger;
         fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
             .then(function (response) {
                 return response.json();

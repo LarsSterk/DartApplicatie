@@ -1,7 +1,7 @@
 function updateSpeler() {
 
     let id = document.querySelector("#idPUT").value
-  //      document.getElementById('#idPUT').value;
+       // document.getElementById('#idPUT').value;
         let formData = new FormData(document.querySelector('#PUTspelerForm'));
         let encData = new URLSearchParams(formData.entries());
 

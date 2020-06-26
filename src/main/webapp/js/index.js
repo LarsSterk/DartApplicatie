@@ -14,6 +14,7 @@ function openNieuwSpelDialog() {
     spelBtn.addEventListener('click', function onOpen() {
         if (typeof spelDialog.showModal === "function"){
             spelDialog.showModal();
+            // getSpelersLijst();
         }else{
             alert("Dialog not supported.") // Als er niks getoond kan worden komt er een error message.
         }

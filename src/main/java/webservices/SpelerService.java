@@ -113,9 +113,6 @@ public class SpelerService {
     @Path("/spelerslijst/update/{id}")
     @RolesAllowed({"speler", "beheerder"})
     @Produces(MediaType.APPLICATION_JSON)
-
-
-
         public String updateSpeler(@PathParam("id") int id, @FormParam("voornaam") String voornaam, @FormParam("achternaam") String achternaam,
                                    @FormParam("leeftijd") int leeftijd, @FormParam("niveau") String niveau) throws IOException {
 
