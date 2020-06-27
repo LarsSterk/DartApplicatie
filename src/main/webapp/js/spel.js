@@ -70,8 +70,14 @@ function addScore() {
     let spelernaam2 = document.getElementById('naam2');
 
     // chck waardes
+    if (parseInt(document.getElementById('worp').value) > 180){
+        alert("De score kan niet hoger zijn dan 180")
+        // if (parseInt(document.getElementById('worp').value) < 0){
+        //     alert("De score kan niet lager zijn dan 0")
+        // }
 
-    if (sessionStorage.getItem("beurt") === "1") {
+    }else {
+        if (sessionStorage.getItem("beurt") === "1") {
         //hoog de worp beurt op als speler 1 aan de beurt is
         let worpCount = parseInt(sessionStorage.getItem("worpCount"));
         worpCount = worpCount + 1;
@@ -112,4 +118,6 @@ function addScore() {
         scoreboard = document.getElementById('worp' + worpCount);
         scoreboard.innerHTML = sessionStorage.getItem("sp2Score");
     }
+    }
+
 }
