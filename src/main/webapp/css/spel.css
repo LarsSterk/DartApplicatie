@@ -17,6 +17,17 @@
 body {
     font-family: sans-serif;
 }
+h1 {
+    font-family: 'Permanent Marker';font-size: 122px
+}
+
+th {
+    font-family: 'Permanent Marker';font-size: 24px;
+    text-align: center;
+}
+td {font-family: 'Permanent Marker';font-size: 24px;
+    text-align: center;
+}
 
 .layout {
     display: flex;

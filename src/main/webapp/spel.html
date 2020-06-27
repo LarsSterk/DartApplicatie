@@ -1,41 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Darts 501</title>
+    <title>Darts Scorebord</title>
     <script type="text/javascript" src="js/spel.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/spel.css">
 </head>
-<body>
-<div class="score-counter">
+<body onload="startSpel()">
 
-    <div id="player-data">
+<!--    <h1 id="naam1"></h1>-->
+<!--    <h1 id="naam2"></h1>-->
 
-        <input type="text" id="p1" placeholder="Enter player1" required><br>
-        <input type="text" id="p2" placeholder="Enter player2" required><br>
-        <button id="start" onclick="startGame()">start</button>
-
-    </div>
-
-
-    <div id="score">
-        <select id="maxscore">
-
-            <option value="">Set winning score</option>
-            <option value="501">501</option>
-<!--            <option value="20">501</option>-->
-<!--            <option value="30">501</option>-->
-
-        </select><br>
-        <p id="inc1">0</p>
-        <span id="to">:</span>
-        <p id="inc2">0</p><br>
-
-
-        <input type="button" id="Player1" onclick="player1()" value="player1"></button>
-        <input type="button" id="Player2" onclick="player2()" value="player2"></button>
-        <button id="reset" onclick="reset()">Reset</button>
-
-    </div>
+<div id="worp-data">
+    <input type="text" id="worp" placeholder="worp score" required><br>
+    <button id="addScore" onclick="addScore()">Worp score toevoegen</button>
 </div>
+
+
+<table id="scoreboard" style="width:100%">
+    <tr>
+        <th>Worp</th>
+        <th id="naam1"></th>
+        <th id="naam2"></th>
+    </tr>
+    <tr>
+        <td>Start</td>
+        <td id="worpstart1"></td>
+        <td id="worpstart2"></td>
+    </tr>
+</table>
+
+
 </body>
 </html>

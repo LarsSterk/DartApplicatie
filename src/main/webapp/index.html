@@ -28,7 +28,6 @@
 
 <script type="text/javascript" src="js/index.js"></script>
 
-
 <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="overlay-content">
@@ -46,13 +45,18 @@
             <!-- Hier komen de ids uit het overzicht te staan -->
         </select></label>
 
-        <label for="idSpeler2">Speler 2 id: <select id="idSpeler2" name="id2" autofocus>
+        <label for="idSpeler2">Speler 2 id: <select id="idSpeler2" name="id2">
             <option value="-Selecteer ID-">-Selecteer ID-</option>
             <!-- Hier komen de ids uit het overzicht te staan -->
         </select></label>
 
+        <label for="spelType">Spel Type: <select id="spelType" name="spelType">
+            <option value="501">501</option>
+            <option value="301">301</option>
+        </select></label>
+
     </form>
-    <button id="startSpel" value="Start spel" onclick="window.location.href='spel.html'" >Start spel</button>
+    <button id="startSpel" value="Spel aanmaken" onclick="spelAanmaken()" >Spel aanmaken</button>
     <button id="backBtn" value="Terug">Terug</button>
 
 </dialog>

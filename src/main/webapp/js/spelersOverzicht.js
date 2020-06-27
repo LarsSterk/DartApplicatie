@@ -1,10 +1,10 @@
 function getSpelersLijst() {
+
     fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            //debugger;
             let replaceHTML ="";
             //Verwerk het json antwoord van de service in een tabel (via de array van spelers)
             let spelerArr = data;
@@ -30,14 +30,6 @@ function getSpelersLijst() {
                 opt2.value = spelerObj.id;
                 opt2.innerHTML = spelerObj.id + " " + spelerObj.voornaam+ " "+ spelerObj.achternaam;
                 document.getElementById('idDel').appendChild(opt2);
-                // document.getElementById('idSpeler1').appendChild(opt2);
-                // document.getElementById('idSpeler2').appendChild(opt2);
-
-                // let opt3 = document.createElement('option');
-                // opt3.value = spelerObj.id;
-                // opt3.innerHTML = spelerObj.id + " " + spelerObj.voornaam+ " "+ spelerObj.achternaam;
-                // document.getElementById('idSpeler1').appendChild(opt3);
-
             }
             //Vervang de rijen in de html met de nieuwe rijen
             document.getElementById("Spelers").innerHTML = replaceHTML;
@@ -65,7 +57,7 @@ function openUpdateDialog() {
 
     document.querySelector('#idPUT').addEventListener("change", function () {
         let selectedId = document.querySelector("#idPUT").value;
-debugger;
+
         fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
             .then(function (response) {
                 return response.json();
@@ -77,7 +69,6 @@ debugger;
                 for (let i = 0; i < spelerArr.length; i++) {
 
                     let spelerObj = spelerArr[i];
-                    debugger ;
                     if (spelerObj.id === parseInt(selectedId)) {
 
                         //Zet de detailgegevens in het updatescherm
