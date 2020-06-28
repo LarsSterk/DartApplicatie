@@ -27,16 +27,17 @@ public class SpelersDAO implements Serializable {
         this.spelersList = spelersList;
     }
 
-    public int getMaxId(){
+    public int getMaxId() {
         return maxID;
     }
-    public void setMaxId(int newID){
+
+    public void setMaxId(int newID) {
         maxID = newID;
     }
 
-    public SpelersDAO (int maxID, List<Speler> spelersList){
+    public SpelersDAO(int maxID, List<Speler> spelersList) {
         this.maxID = maxID;
-        this.spelersList =  spelersList;
+        this.spelersList = spelersList;
     }
 
     private SpelersDAO() {
@@ -44,22 +45,22 @@ public class SpelersDAO implements Serializable {
             SpelersDAO loadedDAO = PersistenceManager.loadSpelerFromAzure();
             if (loadedDAO == null) {
                 // Set 3 spelers hardcoded erin
-                spelersList.add(new Speler(1, "André", "Onana", 24, "Professional"));
-                spelersList.add(new Speler(2, "Virgil", "van Dijk", "Amateur"));
-                spelersList.add(new Speler(3, "Erik", "ten Hag", "Beginner"));
+                spelersList.add(new Speler(1, "Michael", "van Gerwen", 31, "Professional"));
+                spelersList.add(new Speler(2, "Raymond", "van Barneveld", 53, "Professional"));
+                spelersList.add(new Speler(3, "Lars", "Sterk", 19, "Amateur"));
 
             } else {
                 this.setMaxId(loadedDAO.getMaxId());
                 this.setSpelersList(loadedDAO.getAllSpelers());
             }
-        }catch (IOException io){
+        } catch (IOException io) {
             System.out.println(io.getMessage());
         }
     }
 
 
-    public Speler getSpelerById(int ID){
-        for (Speler speler:spelersList){
+    public Speler getSpelerById(int ID) {
+        for (Speler speler : spelersList) {
             if (speler.getId() == ID) {
                 return speler;
             }
@@ -67,17 +68,17 @@ public class SpelersDAO implements Serializable {
         return null;
     }
 
-    public Speler getSpelerByName(String achternaam){
-        for (Speler speler : spelersList){
-            if (speler.getAchternaam().equals(achternaam)){
+    public Speler getSpelerByName(String achternaam) {
+        for (Speler speler : spelersList) {
+            if (speler.getAchternaam().equals(achternaam)) {
                 return speler;
             }
         }
         return null;
     }
 
-    public Speler getSpeler(int id){
-        return getAllSpelers().stream().filter(e->e.getId()==id).findFirst().orElse(null);
+    public Speler getSpeler(int id) {
+        return getAllSpelers().stream().filter(e -> e.getId() == id).findFirst().orElse(null);
     }
 
 
@@ -90,22 +91,22 @@ public class SpelersDAO implements Serializable {
     }
 
     public boolean updateSpeler(Speler upSpeler) throws IOException {
-        for (Speler speler : spelersList){
-            if (speler.getId() == upSpeler.getId()){
+        for (Speler speler : spelersList) {
+            if (speler.getId() == upSpeler.getId()) {
 
                 int index = spelersList.indexOf(speler);
-                if (!(upSpeler.getVoornaam().equals(""))){
+                if (!(upSpeler.getVoornaam().equals(""))) {
                     speler.setVoornaam(upSpeler.getVoornaam());
                 }
-                if (!(upSpeler.getAchternaam().equals(""))){
+                if (!(upSpeler.getAchternaam().equals(""))) {
                     speler.setAchternaam(upSpeler.getAchternaam());
                 }
 
-                if (!(upSpeler.getLeeftijd() == 0 )){
+                if (!(upSpeler.getLeeftijd() == 0)) {
                     speler.setLeeftijd(upSpeler.getLeeftijd());
                 }
 
-                if (!(upSpeler.getNiveau().equals(speler.getNiveau()) )){
+                if (!(upSpeler.getNiveau().equals(speler.getNiveau()))) {
                     speler.setNiveau(upSpeler.getNiveau());
                 }
 
@@ -115,11 +116,11 @@ public class SpelersDAO implements Serializable {
             }
         }
         return false;
-  }
+    }
 
     public boolean deleteSpeler(int id) throws IOException {
-        for(Speler speler : spelersList){
-            if(speler.getId() == id){
+        for (Speler speler : spelersList) {
+            if (speler.getId() == id) {
                 int index = spelersList.indexOf(speler);
                 spelersList.remove(index);
                 PersistenceManager.saveSpelerToAzure(spelersDAO);
