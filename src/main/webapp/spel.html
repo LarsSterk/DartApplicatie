@@ -5,9 +5,30 @@
     <meta charset="UTF-8">
     <title>Darts Scorebord</title>
     <script type="text/javascript" src="js/spel.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/spel.css">
+    <link rel="stylesheet" href="css/navbar.css" type="text/css">
+
 </head>
 <body onload="startSpel()">
+
+<script>
+    if (sessionStorage.getItem('status') != null) {
+        // Login is ok, niks uitvoeren
+    } else {
+        //redirect to page
+        window.location.replace("login.html?src=spel.html");
+    }
+</script>
+
+
+<ul id="navbar">
+    <li><a href="index.html">Home menu</a></li>
+    <li><a onclick="herstartSpel()">Opnieuw starten</a> </li>
+    <li><a href="applicatieHandleiding.html">Handleiding</a></li>
+    <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>
+</ul>
+
 
 <!--    <h1 id="naam1"></h1>-->
 <!--    <h1 id="naam2"></h1>-->
@@ -16,6 +37,8 @@
     <input type="text" id="worp" placeholder="worp score" required><br>
     <button id="addScore" onclick="addScore()">Worp score toevoegen</button>
 </div>
+
+
 
 
 <table id="scoreboard" style="width:100%">

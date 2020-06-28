@@ -60,7 +60,10 @@ function startSpel() {
             console.log('error: ' + err);
 
         });
+}
 
+function herstartSpel() {
+    window.location.replace('spel.html');
 
 }
 
@@ -194,7 +197,7 @@ function addScore() {
 
                 document.getElementById('addScore').disabled = true;
 
-                alert(sessionStorage.getItem("sp2Naam")+" heeft gewonnen!!");
+                alert(sessionStorage.getItem("sp2Naam") + " heeft gewonnen!!");
 
             } else {
                 score = parseInt(sessionStorage.getItem("sp2Score"));
@@ -213,7 +216,7 @@ function addScore() {
                 scoreboard = document.getElementById('worp' + worpCount);
                 scoreboard.innerHTML = sessionStorage.getItem("sp2Score");
 
-                alert(sessionStorage.getItem("sp1Naam")+ " bust");
+                alert(sessionStorage.getItem("sp1Naam") + " bust");
 
             }
         }
