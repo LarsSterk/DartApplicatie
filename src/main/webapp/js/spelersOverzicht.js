@@ -1,34 +1,34 @@
 function getSpelersLijst() {
 
-    fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
+    fetch("/restservices/spelers/spelerslijst", {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+    })
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            let replaceHTML ="";
+            let replaceHTML = "";
             //Verwerk het json antwoord van de service in een tabel (via de array van spelers)
             let spelerArr = data;
-            //per array rij een speler
 
             //per array rij een speler
-
-
             for (let i = 0; i < spelerArr.length; i++) {
 
                 // Voeg de speler toe aan de lijst
                 let spelerObj = spelerArr[i];
-                replaceHTML += "<tr><td>"+spelerObj.id +"</td><td>"+spelerObj.voornaam+ "</td><td>"+spelerObj.achternaam+"</td><td>"+spelerObj.leeftijd+"</td><td>"+spelerObj.niveau+ "</td></tr>";
+                replaceHTML += "<tr><td>" + spelerObj.id + "</td><td>" + spelerObj.voornaam + "</td><td>" + spelerObj.achternaam + "</td><td>" + spelerObj.leeftijd + "</td><td>" + spelerObj.niveau + "</td></tr>";
 
                 // voeg het id toe aan het update scherm
                 let opt = document.createElement('option');
                 opt.value = spelerObj.id;
-                opt.innerHTML = spelerObj.id + " " +spelerObj.voornaam+ " "+ spelerObj.achternaam;
+                opt.innerHTML = spelerObj.id + " " + spelerObj.voornaam + " " + spelerObj.achternaam;
                 document.getElementById('idPUT').appendChild(opt);
 
                 // voeg het id toe aan het delete scherm
                 let opt2 = document.createElement('option');
                 opt2.value = spelerObj.id;
-                opt2.innerHTML = spelerObj.id + " " + spelerObj.voornaam+ " "+ spelerObj.achternaam;
+                opt2.innerHTML = spelerObj.id + " " + spelerObj.voornaam + " " + spelerObj.achternaam;
                 document.getElementById('idDel').appendChild(opt2);
             }
             //Vervang de rijen in de html met de nieuwe rijen
@@ -46,9 +46,9 @@ function openUpdateDialog() {
     const updateDialog = document.getElementById('updateDialog');
 
     updateSpelerButton.addEventListener('click', function onOpen() {
-        if (typeof updateDialog.showModal === "function"){
+        if (typeof updateDialog.showModal === "function") {
             updateDialog.showModal();
-        }else{
+        } else {
             alert("Dialog not supported.") // Als er niks getoond kan worden komt er een error message.
         }
     })
@@ -58,7 +58,10 @@ function openUpdateDialog() {
     document.querySelector('#idPUT').addEventListener("change", function () {
         let selectedId = document.querySelector("#idPUT").value;
 
-        fetch("/restservices/spelers/spelerslijst", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}})
+        fetch("/restservices/spelers/spelerslijst", {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+        })
             .then(function (response) {
                 return response.json();
             })
@@ -96,25 +99,25 @@ function openDeleteDialog() {
     const deleteBtn = document.getElementById('verwijder-btn');
     const deleteDialog = document.getElementById('delete-dialog');
     deleteBtn.addEventListener('click', function onOpen() {
-        if (typeof deleteDialog.showModal === "function"){
-        deleteDialog.showModal();
-        }else{
+        if (typeof deleteDialog.showModal === "function") {
+            deleteDialog.showModal();
+        } else {
             alert("Dialog not supported.") // Als er niks getoond kan worden komt er een error message.
         }
     })
 }
 
 function closeUpdateDialog() {
-    const upBackBtn =document.getElementById('upBackBtn');
+    const upBackBtn = document.getElementById('upBackBtn');
     const updateDialog = document.getElementById('updateDialog');
 
     upBackBtn.addEventListener('click', function onCancel() {
-    updateDialog.close();
+        updateDialog.close();
     })
 }
 
 function closeDeleteDialog() {
-    const delBackBtn =document.getElementById('delBackBtn');
+    const delBackBtn = document.getElementById('delBackBtn');
     const deleteDialog = document.getElementById('delete-dialog');
 
     delBackBtn.addEventListener('click', function onCancel() {

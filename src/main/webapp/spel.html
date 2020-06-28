@@ -6,6 +6,7 @@
     <title>Darts Scorebord</title>
     <script type="text/javascript" src="js/spel.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/spel.css">
     <link rel="stylesheet" href="css/navbar.css" type="text/css">
 
@@ -29,17 +30,12 @@
     <li><a href="login.html" onclick="cleanSession()">Log uit</a></li>
 </ul>
 
-
-<!--    <h1 id="naam1"></h1>-->
-<!--    <h1 id="naam2"></h1>-->
+<br>
 
 <div id="worp-data">
-    <input type="text" id="worp" placeholder="worp score" required><br>
-    <button id="addScore" onclick="addScore()">Worp score toevoegen</button>
+    <input type="text" id="worp" placeholder="worp score" required >
+    <button id="addScore" onclick="addScore()" autofocus>Worp score toevoegen</button>
 </div>
-
-
-
 
 <table id="scoreboard" style="width:100%">
     <tr>
@@ -48,12 +44,11 @@
         <th id="naam2"></th>
     </tr>
     <tr>
-        <td>Start</td>
+        <td></td>
         <td id="worpstart1"></td>
         <td id="worpstart2"></td>
     </tr>
 </table>
-
 
 </body>
 </html>

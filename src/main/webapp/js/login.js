@@ -5,11 +5,15 @@ function login(event) {
     let formData = new FormData(document.querySelector("#loginForm"));
     let encData = new URLSearchParams(formData.entries());
     // debugger;
-    fetch("/restservices/authentication", {method: 'POST', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")}, body: encData})
+    fetch("/restservices/authentication", {
+        method: 'POST',
+        headers: {'Authorization': 'Bearer ' + window.sessionStorage.getItem("myJWT")},
+        body: encData
+    })
         .then(function (response) {
-            if (response.ok){
+            if (response.ok) {
                 return response.json();
-            }else {
+            } else {
                 throw "Wrong username or password"; // Gaat naar de catch waar de alert wordt uitgevoerd.
             }
 
@@ -17,7 +21,7 @@ function login(event) {
         .then(function (myJson) {
             window.sessionStorage.setItem("myJWT", myJson.JWT);
             window.sessionStorage.setItem("status", "loggedIn");
-            if (srcRedirect === null){
+            if (srcRedirect === null) {
                 srcRedirect = "index.html";
             }
             window.location.replace(srcRedirect);
@@ -30,4 +34,5 @@ function login(event) {
 
         })
 }
+
 document.querySelector('#login').addEventListener("click", login)
