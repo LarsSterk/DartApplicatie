@@ -23,7 +23,6 @@ function startSpel() {
     sessionStorage.setItem("beurt", "1");
     spelernaam1.style.color = "green";
 
-
     //haal spelersnaam 1 op
 
     fetch("/restservices/spelers/spelerslijst/" + id1, {
@@ -65,59 +64,159 @@ function startSpel() {
 
 }
 
+function controleerInvoerWorp(worp) {
+    if (isNaN(worp)) {
+        alert("Let op: ingevulde waarde moet bestaan uit cijfers tussen 0 en 180.")
+        return false;
+    } else {
+        if (parseInt(worp) > 180) {
+            alert("De score kan niet hoger zijn dan 180.")
+            return false;
+        } else if (parseInt(worp) < 0) {
+            alert("De score kan niet lager zijn dan 0.")
+            return false;
+        } else if (parseInt(worp) === 163 ||  // Check of de score geen onmogelijke score is
+            parseInt(worp) === 166 ||
+            parseInt(worp) === 169 ||
+            parseInt(worp) === 172 ||
+            parseInt(worp) === 173 ||
+            parseInt(worp) === 175 ||
+            parseInt(worp) === 176 ||
+            parseInt(worp) === 178 ||
+            parseInt(worp) === 179) {
+            alert("Onmogelijke invoer: Deze worp score is niet haalbaar met drie pijlen.")
+            return false;
+        }
+    }
+    return true;
+}
+
 function addScore() {
     let spelernaam1 = document.getElementById('naam1');
     let spelernaam2 = document.getElementById('naam2');
+    let worpInvoer = document.getElementById('worp').value;
+    let worpWaarde = parseInt(worpInvoer);
+
 
     // chck waardes
-    if (parseInt(document.getElementById('worp').value) > 180){
-        alert("De score kan niet hoger zijn dan 180")
-        // if (parseInt(document.getElementById('worp').value) < 0){
-        //     alert("De score kan niet lager zijn dan 0")
-        // }
+    if (controleerInvoerWorp(worpInvoer)) {
+        // Als score juist is dan :
+        if (sessionStorage.getItem("beurt") === "1") { // Check of speler 1 aan de beurt is
+            // Check of de worp score niet hoger is dan de score van speler 1
 
-    }else {
-        if (sessionStorage.getItem("beurt") === "1") {
-        //hoog de worp beurt op als speler 1 aan de beurt is
-        let worpCount = parseInt(sessionStorage.getItem("worpCount"));
-        worpCount = worpCount + 1;
-        sessionStorage.setItem("worpCount", worpCount);
+            if ((parseInt(sessionStorage.getItem("sp1Score")) - worpWaarde !== 1) && (worpWaarde < parseInt(sessionStorage.getItem("sp1Score")))) {
+                //hoog de worp beurt op als speler 1 aan de beurt is
+                let worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                worpCount = worpCount + 1;
+                sessionStorage.setItem("worpCount", worpCount);
 
-        let worp = parseInt(document.getElementById('worp').value);
-        let score = parseInt(sessionStorage.getItem("sp1Score"));
-        score = score - worp;
+                let score = parseInt(sessionStorage.getItem("sp1Score"));
+                score = score - worpWaarde;
 
-        //sla de score op
-        sessionStorage.setItem("sp1Score", score);
+                //sla de score op
+                sessionStorage.setItem("sp1Score", score);
 
-        // Volgende beurt is voor speler 2
-        spelernaam1.style.color = "black";
-        sessionStorage.setItem("beurt", "2");
-        spelernaam2.style.color = "green";
+                // Volgende beurt is voor speler 2
+                spelernaam1.style.color = "black";
+                sessionStorage.setItem("beurt", "2");
+                spelernaam2.style.color = "green";
 
-        //zet de nieuwe score van speler 1 op het scherm
-        let scoreboard = document.getElementById('scoreboard');
-        scoreboard.innerHTML = scoreboard.innerHTML + "<tr><td>" + worpCount + "</td><td>" + sessionStorage.getItem("sp1Score") + "<td id=\"worp" + worpCount + "\"></td>"
+                //zet de nieuwe score van speler 1 op het scherm
+                let scoreboard = document.getElementById('scoreboard');
+                scoreboard.innerHTML = scoreboard.innerHTML + "<tr><td>" + worpCount + "</td><td>" + sessionStorage.getItem("sp1Score") + "<td id=\"worp" + worpCount + "\"></td>"
 
-    } else {
-        worp = parseInt(document.getElementById('worp').value);
-        score = parseInt(sessionStorage.getItem("sp2Score"));
-        score = score - worp;
+            } else if (parseInt(sessionStorage.getItem("sp1Score")) === worpWaarde) {
+                let worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                worpCount = worpCount + 1;
+                sessionStorage.setItem("worpCount", worpCount);
 
-        //sla de score op
-        sessionStorage.setItem("sp2Score", score);
+                let score = parseInt(sessionStorage.getItem("sp1Score"));
+                score = score - worpWaarde;
 
-        // Volgende beurt is voor speler 2
-        spelernaam2.style.color = "black";
-        sessionStorage.setItem("beurt", "1");
-        spelernaam1.style.color = "green";
+                //sla de score op
+                sessionStorage.setItem("sp1Score", score);
 
-        //zet de nieuwe score van speler 2 op het scherm
-        worpCount = parseInt(sessionStorage.getItem("worpCount"));
-        //De kolom bestaat al dus alleen op de goede plek zetten voor speler 2
-        scoreboard = document.getElementById('worp' + worpCount);
-        scoreboard.innerHTML = sessionStorage.getItem("sp2Score");
-    }
+                let scoreboard = document.getElementById('scoreboard');
+                scoreboard.innerHTML = scoreboard.innerHTML + "<tr><td>" + worpCount + "</td><td>" + "WINNAAR!" + "<td id=\"worp" + worpCount + "\"></td>"
+
+                document.getElementById('addScore').disabled = true;
+
+                alert(sessionStorage.getItem("sp1Naam") + " heeft gewonnen!!")
+
+
+            } else {
+                let worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                worpCount = worpCount + 1;
+                sessionStorage.setItem("worpCount", worpCount);
+
+                // Volgende beurt is voor speler 2
+                spelernaam1.style.color = "black";
+                sessionStorage.setItem("beurt", "2");
+                spelernaam2.style.color = "green";
+
+                //zet de nieuwe score van speler 1 op het scherm
+                let scoreboard = document.getElementById('scoreboard');
+                scoreboard.innerHTML = scoreboard.innerHTML + "<tr><td>" + worpCount + "</td><td>" + sessionStorage.getItem("sp1Score") + "<td id=\"worp" + worpCount + "\"></td>"
+                alert(sessionStorage.getItem("sp1Naam") + " bust")
+
+            }
+        } else {
+            if ((parseInt(sessionStorage.getItem("sp2Score")) - worpWaarde !== 1) && (worpWaarde < parseInt(sessionStorage.getItem("sp2Score")))) {
+                score = parseInt(sessionStorage.getItem("sp2Score"));
+                score = score - worpWaarde;
+
+                //sla de score op
+                sessionStorage.setItem("sp2Score", score);
+
+                // Volgende beurt is voor speler 2
+                spelernaam2.style.color = "black";
+                sessionStorage.setItem("beurt", "1");
+                spelernaam1.style.color = "green";
+
+                //zet de nieuwe score van speler 2 op het scherm
+                worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                //De kolom bestaat al dus alleen op de goede plek zetten voor speler 2
+                scoreboard = document.getElementById('worp' + worpCount);
+                scoreboard.innerHTML = sessionStorage.getItem("sp2Score");
+            } else if (parseInt(sessionStorage.getItem("sp2Score")) === worpWaarde) {
+
+                let score = parseInt(sessionStorage.getItem("sp2Score"));
+                score = score - worpWaarde;
+
+                //sla de score op
+                sessionStorage.setItem("sp2Score", score);
+
+                //zet de nieuwe score van speler 2 op het scherm
+                worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                //De kolom bestaat al dus alleen op de goede plek zetten voor speler 2
+                scoreboard = document.getElementById('worp' + worpCount);
+                scoreboard.innerHTML = "WINNAAR!";
+
+                document.getElementById('addScore').disabled = true;
+
+                alert(sessionStorage.getItem("sp2Naam")+" heeft gewonnen!!");
+
+            } else {
+                score = parseInt(sessionStorage.getItem("sp2Score"));
+
+                //sla de score op
+                sessionStorage.setItem("sp2Score", score);
+
+                // Volgende beurt is voor speler 2
+                spelernaam2.style.color = "black";
+                sessionStorage.setItem("beurt", "1");
+                spelernaam1.style.color = "green";
+
+                //zet de nieuwe score van speler 2 op het scherm
+                worpCount = parseInt(sessionStorage.getItem("worpCount"));
+                //De kolom bestaat al dus alleen op de goede plek zetten voor speler 2
+                scoreboard = document.getElementById('worp' + worpCount);
+                scoreboard.innerHTML = sessionStorage.getItem("sp2Score");
+
+                alert(sessionStorage.getItem("sp1Naam")+ " bust");
+
+            }
+        }
     }
 
 }
